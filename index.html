@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>works — E-Tone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #faf9f7;
+  --white: #ffffff;
+  --text: #1c1c1a;
+  --text2: #999891;
+  --line: rgba(0,0,0,0.07);
+}
+body {
+  font-family: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-weight: 300;
+}
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg);
+  border-bottom: 0.5px solid var(--line);
+  padding: 1.8rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-left {
+  display: flex; align-items: center; gap: 2rem;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--text);
+}
+.nav-logo-img {
+  height: 56px; width: auto;
+  object-fit: contain;
+  filter: none;
+}
+.nav-logo-text {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 15px; font-weight: 500; letter-spacing: 0.1em;
+}
+.nav-tagline {
+  font-size: 11px;
+  color: var(--text);
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+  border-left: 0.5px solid var(--line);
+  padding-left: 2rem;
+}
+@media (max-width: 700px) {
+  .nav-tagline { display: none; }
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: 10px; }
+  .nav-logo-img { height: 36px; }
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 11px; color: var(--text2); text-decoration: none;
+  letter-spacing: 0.12em; transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+.hero { padding: 5rem 3rem 4rem; max-width: 960px; }
+.hero-label { font-size: 10px; letter-spacing: 0.2em; color: var(--text2); text-transform: uppercase; margin-bottom: 1rem; }
+.hero-title { font-family: 'Shippori Mincho', serif; font-size: clamp(24px, 4vw, 38px); font-weight: 400; line-height: 1.5; letter-spacing: 0.04em; }
+
+.works-section {
+  border-top: 0.5px solid var(--line);
+  padding: 6rem 4rem;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.works-section.visible { opacity: 1; transform: none; }
+
+.section-inner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .section-inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .section-left {
+    position: static !important;
+  }
+}
+
+.section-left {
+  position: sticky;
+  top: 90px;
+}
+.section-header {
+  margin-bottom: 1.5rem;
+}
+.section-title { font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 400; letter-spacing: 0.06em; }
+.section-count { font-size: 10px; color: var(--text2); letter-spacing: 0.1em; margin-top: 6px; }
+.section-desc {
+  font-size: 12px;
+  color: var(--text);
+  line-height: 2.2;
+  letter-spacing: 0.04em;
+  white-space: pre-line;
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 0.5px solid var(--line);
+}
+
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+  nav { padding: 1.2rem 1.5rem; }
+  .hero, .works-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+@media (max-width: 560px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+
+.thumb {
+  aspect-ratio: 1 / 1; overflow: hidden; cursor: pointer;
+  background: var(--white); position: relative;
+}
+.thumb img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.5s ease, filter 0.3s ease;
+  filter: saturate(0.9);
+}
+.thumb:hover img { transform: scale(1.04); filter: saturate(1.1); }
+.thumb.collapsed { display: none; }
+
+.more-wrap { margin-top: 2rem; display: flex; align-items: center; gap: 1.5rem; }
+.more-btn {
+  background: none; border: 0.5px solid var(--text); color: var(--text);
+  font-family: inherit; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.12em; padding: 10px 24px; cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.more-btn:hover { background: var(--text); color: var(--bg); }
+.more-btn.hidden, .more-remaining.hidden { display: none; }
+.more-remaining { font-size: 10px; color: var(--text2); letter-spacing: 0.08em; }
+
+
+/* ── Featured section ── */
+.works-section.featured {
+  background: var(--white);
+  padding: 7rem 4rem;
+}
+.featured-title {
+  font-size: 26px !important;
+}
+.featured-badge {
+  display: inline-block;
+  margin-left: 12px;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: var(--text2);
+  vertical-align: middle;
+  text-transform: uppercase;
+  border: 0.5px solid var(--text2);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+#lb {
+  display: none; position: fixed; inset: 0; z-index: 999;
+  background: rgba(250,249,247,0.97);
+  align-items: center; justify-content: center; flex-direction: column;
+}
+#lb.open { display: flex; }
+#lb-img { max-width: 80vw; max-height: 80vh; object-fit: contain; display: block; }
+#lb-close {
+  position: fixed; top: 1.8rem; right: 2rem;
+  background: none; border: none; color: var(--text2);
+  font-size: 14px; cursor: pointer; letter-spacing: 0.1em;
+  font-family: inherit; font-weight: 300;
+}
+#lb-close:hover { color: var(--text); }
+#lb-nav { display: flex; gap: 2rem; margin-top: 1.5rem; align-items: center; }
+#lb-prev, #lb-next {
+  background: none; border: none; color: var(--text2);
+  font-size: 20px; cursor: pointer; padding: 4px 8px; transition: color 0.15s;
+}
+#lb-prev:hover, #lb-next:hover { color: var(--text); }
+#lb-caption { font-size: 10px; letter-spacing: 0.14em; color: var(--text2); }
+
+footer {
+  border-top: 0.5px solid var(--line);
+  padding: 2.5rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 10px; color: var(--text2); letter-spacing: 0.1em;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a class="nav-logo" href="index.html">
+      <img src="kari_E-Tone_logo.png" alt="E-Tone" class="nav-logo-img">
+      <span class="nav-logo-text">E-Tone</span>
+    </a>
+    <p class="nav-tagline">合理なく　白紙の上に　描いていく<br>終わることなき　酔狂ひとつ</p>
+  </div>
+  <ul class="nav-links">
+    <li><a href="works.html" class="active">works</a></li>
+    <li><a href="about.html">about</a></li>
+    <li><a href="contact.html">contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p class="hero-label">works</p>
+  <h1 class="hero-title">眞志喜 徹也の<br>イラスト・漫画作品集</h1>
+</div>
+
+<div id="sections-container"></div>
+
+<footer>
+  <span>&copy; E-Tone / 眞志喜 徹也</span>
+  <span>Okinawa, Japan</span>
+</footer>
+
+<div id="lb">
+  <button id="lb-close">close</button>
+  <img id="lb-img" src="" alt="">
+  <div id="lb-nav">
+    <button id="lb-prev">&#x2190;</button>
+    <span id="lb-caption"></span>
+    <button id="lb-next">&#x2192;</button>
+  </div>
+</div>
+
+<script>
+const PREVIEW = 8;
+
+const FEATURED = '似顔絵マインドマップ';
+
+const DESCRIPTIONS = {
+  '似顔絵マインドマップ': 'コロナ期に葛藤していた思いを描きました。\n有名人の似顔絵と、\nマインドマップを組み合わせて、\n自由に表現した作品です。',
+  '4コマ漫画': '日常のひとコマを\n家族の視点から切り取った作品集です。\nくすっと笑える、\nありふれた毎日の断片たち。',
+  'キャラクター': 'オリジナルキャラクターと\nアニメーションの作品集です。\n地域の行事や日常をモチーフに、\nキャラクターに命を吹き込んでいます。',
+  '落書き': '思いつくままに描いた、\n制約なきスケッチたち。\n有名人や好きなものを\n自由に、軽やかに。',
+};
+
+const DATA = {
+  '似顔絵マインドマップ': [
+    'works/mindmap/abesinzo.jpg',
+    'works/mindmap/ainsyutain.jpg',
+    'works/mindmap/asasyoryu.jpg',
+    'works/mindmap/hiro.jpg',
+    'works/mindmap/kotouge.jpg',
+    'works/mindmap/kubotamasataka.jpg',
+    'works/mindmap/mikawayasabu.jpg',
+    'works/mindmap/nasubi.jpg',
+    'works/mindmap/rokkakuseizi.jpg',
+    'works/mindmap/sasakikuranosuke.jpg',
+    'works/mindmap/sawabeyu.jpg',
+    'works/mindmap/yanagisawaatsushi.jpg',
+    'works/mindmap/YOSHIKI.jpg',
+    'works/mindmap/zibun4koma.jpg',
+  ],
+  '4コマ漫画': [
+    'works/manga/manga01.jpg',
+    'works/manga/manga02.jpg',
+    'works/manga/manga03.jpg',
+    'works/manga/manga04.jpg',
+    'works/manga/manga05.jpg',
+    'works/manga/manga06.jpg',
+    'works/manga/manga07.jpg',
+    'works/manga/manga08.jpg',
+    'works/manga/manga09.jpg',
+  ],
+  'キャラクター': [
+    'works/chara/20140504baby in car.jpg',
+    'works/chara/2014nenga.jpg',
+    'works/chara/2015nenga.jpg',
+    'works/chara/2016nenga.jpg',
+    'works/chara/2017nenga.jpg',
+    'works/chara/2022nenga.jpg',
+    'works/chara/2023nenga.jpg',
+    'works/chara/2025nenga.jpg',
+    'works/chara/2026nenga.jpg',
+    'works/chara/janastar1.gif',
+    'works/chara/janastar2.gif',
+    'works/chara/janastar3.gif',
+    'works/chara/janastar4.gif',
+    'works/chara/kazoku.jpg',
+    'works/chara/ojana_honensai.jpg',
+    'works/chara/onikyudan1.GIF',
+    'works/chara/onikyudan2.GIF',
+    'works/chara/onikyudan3.GIF',
+    'works/chara/onikyudan4.GIF',
+    'works/chara/syuko_soroban.jpg',
+  ],
+  '落書き': [
+    'works/rakugaki/36oku.jpg',
+    'works/rakugaki/bakarizumu.jpg',
+    'works/rakugaki/drankmonkey.jpg',
+    'works/rakugaki/eguzeido.jpg',
+    'works/rakugaki/gussan.jpg',
+    'works/rakugaki/hakuho.jpg',
+    'works/rakugaki/hondakeisuke.jpg',
+    'works/rakugaki/hurutachi.jpg',
+    'works/rakugaki/kagawateruyuki.jpg',
+    'works/rakugaki/kajisakku.jpg',
+    'works/rakugaki/kamenraidaj.jpg',
+    'works/rakugaki/kingdomoji.jpg',
+    'works/rakugaki/messhi.jpg',
+    'works/rakugaki/mixi8201330.png',
+    'works/rakugaki/mixi8204067.png',
+    'works/rakugaki/mixi8279537.png',
+    'works/rakugaki/mixi8281112.png',
+    'works/rakugaki/mixi8335173.png',
+    'works/rakugaki/mixi8851838.png',
+    'works/rakugaki/nagatomo.jpg',
+    'works/rakugaki/nakamurashinsuke.jpg',
+    'works/rakugaki/nakanishimanabu.jpg',
+    'works/rakugaki/nomurakatsuya.jpg',
+    'works/rakugaki/okazakisinzi.jpg',
+    'works/rakugaki/projectA.jpg',
+    'works/rakugaki/ragubidaihyo.jpeg',
+    'works/rakugaki/rainmaker.jpg',
+    'works/rakugaki/ranbo.jpg',
+    'works/rakugaki/rosamotard.jpeg',
+    'works/rakugaki/smap.jpg',
+    'works/rakugaki/syokakunren.jpg',
+    'works/rakugaki/takadanobuhiko.jpg',
+    'works/rakugaki/tanahasshi.jpg',
+    'works/rakugaki/tenryu.jpg',
+    'works/rakugaki/tutugo.jpg',
+    'works/rakugaki/yamashitashinzi.jpg',
+    'works/rakugaki/yoshidasaori.jpg',
+    'works/rakugaki/ziou.jpg',
+    'works/rakugaki/zyokobichi.jpg',
+  ],
+};
+
+// ※ BMPファイル（mixi8770097.bmp, mixi8780263.bmp）はブラウザ非対応のため除外しています。
+// JPGまたはPNGに変換後、works/rakugaki/ に追加してください。
+
+let lbImages = [];
+let lbIndex = 0;
+
+function render() {
+  const container = document.getElementById('sections-container');
+  Object.entries(DATA).forEach(([cat, images]) => {
+    const preview = images.slice(0, PREVIEW);
+    const rest = images.slice(PREVIEW);
+
+    const section = document.createElement('div');
+    const isFeatured = cat === FEATURED;
+    section.className = 'works-section' + (isFeatured ? ' featured' : '');
+
+    const desc = DESCRIPTIONS[cat] || '';
+    section.innerHTML = `
+      <div class="section-inner">
+        <div class="section-left">
+          <div class="section-header">
+            <h2 class="section-title${isFeatured ? ' featured-title' : ''}">${cat}${isFeatured ? '<span class="featured-badge">featured</span>' : ''}</h2>
+            <div class="section-count">${images.length} works</div>
+          </div>
+          ${desc ? `<p class="section-desc">${desc}</p>` : ''}
+        </div>
+        <div class="section-right">
+          <div class="grid">
+            ${preview.map(src => `
+              <div class="thumb" data-src="${src}" data-cat="${cat}">
+                <img src="${src}" alt="${cat}" loading="lazy">
+              </div>`).join('')}
+            ${rest.map(src => `
+              <div class="thumb collapsed" data-src="${src}" data-cat="${cat}">
+                <img src="${src}" alt="${cat}" loading="lazy">
+              </div>`).join('')}
+          </div>
+          <div class="more-wrap">
+            <button class="more-btn ${rest.length === 0 ? 'hidden' : ''}" data-cat="${cat}">more works</button>
+            <span class="more-remaining ${rest.length === 0 ? 'hidden' : ''}">+${rest.length}</span>
+          </div>
+        </div>
+      </div>
+    `;
+    container.appendChild(section);
+  });
+
+  // More ボタン
+  document.querySelectorAll('.more-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+      btn.closest('.works-section').querySelectorAll('.thumb.collapsed').forEach(t => t.classList.remove('collapsed'));
+      btn.classList.add('hidden');
+      btn.nextElementSibling.classList.add('hidden');
+    });
+  });
+
+  // サムネイルクリック
+  document.querySelectorAll('.thumb').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      if (thumb.classList.contains('collapsed')) return;
+      const cat = thumb.dataset.cat;
+      lbImages = Array.from(document.querySelectorAll(`.thumb:not(.collapsed)[data-cat="${cat}"]`))
+        .map(t => t.dataset.src);
+      lbIndex = lbImages.indexOf(thumb.dataset.src);
+      openLb();
+    });
+  });
+
+  // スクロールアニメーション
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.works-section').forEach(s => obs.observe(s));
+}
+
+function openLb() {
+  document.getElementById('lb-img').src = lbImages[lbIndex];
+  document.getElementById('lb-caption').textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function moveLb(dir) {
+  lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+  openLb();
+}
+
+document.getElementById('lb-close').addEventListener('click', closeLb);
+document.getElementById('lb-prev').addEventListener('click', () => moveLb(-1));
+document.getElementById('lb-next').addEventListener('click', () => moveLb(1));
+document.getElementById('lb').addEventListener('click', e => { if (e.target.id === 'lb') closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lb').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') moveLb(-1);
+  if (e.key === 'ArrowRight') moveLb(1);
+});
+
+render();
+</script>
+</body>
+</html>
