@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>works — E-Tone</title>
+<title>E-Tone — 眞志喜 徹也</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -21,109 +21,161 @@ body {
   color: var(--text);
   font-weight: 300;
 }
+
+/* ── ナビ ── */
 nav {
   position: sticky; top: 0; z-index: 100;
   background: var(--bg);
   border-bottom: 0.5px solid var(--line);
-  padding: 1.8rem 3rem;
+  padding: 1.2rem 2rem;
   display: flex; align-items: center; justify-content: space-between;
-}
-.nav-left {
-  display: flex; align-items: center; gap: 2rem;
+  gap: 1rem;
 }
 .nav-logo {
   display: flex; align-items: center; gap: 10px;
   text-decoration: none; color: var(--text);
+  flex-shrink: 0;
 }
-.nav-logo-img {
-  height: 56px; width: auto;
-  object-fit: contain;
-  filter: none;
-}
+.nav-logo-img { height: 40px; width: auto; object-fit: contain; }
 .nav-logo-text {
   font-family: 'Shippori Mincho', serif;
-  font-size: 15px; font-weight: 500; letter-spacing: 0.1em;
+  font-size: 14px; font-weight: 500; letter-spacing: 0.1em;
 }
-.nav-tagline {
-  font-size: 11px;
+@media (max-width: 600px) {
+  .nav-logo-img { height: 32px; }
+}
+
+/* ── タブバー（PC用） ── */
+.tab-bar {
+  display: flex; align-items: center; gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn {
+  background: none; border: none;
+  font-family: inherit; font-size: 11px; font-weight: 300;
+  color: var(--text2); letter-spacing: 0.1em;
+  padding: 0.5rem 1rem;
+  cursor: pointer; white-space: nowrap;
+  border-bottom: 1.5px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  margin-bottom: -1px;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--text); border-bottom-color: var(--text); }
+
+/* ── ハンバーガーボタン（スマホ用） ── */
+.menu-btn {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  flex-direction: column; justify-content: center;
+  gap: 5px; padding: 4px; flex-shrink: 0;
+}
+.menu-btn span {
+  display: block; width: 22px; height: 1px;
+  background: var(--text);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.menu-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.menu-btn.open span:nth-child(2) { opacity: 0; }
+.menu-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 767px) {
+  .tab-bar { display: none; }
+  .menu-btn { display: flex; }
+}
+
+/* ── 全画面オーバーレイメニュー ── */
+.overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 200;
+  background: var(--bg);
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0;
+}
+.overlay.open { display: flex; }
+.overlay-btn {
+  background: none; border: none;
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(20px, 5vw, 32px);
+  font-weight: 400; letter-spacing: 0.1em;
+  color: var(--text2); cursor: pointer;
+  padding: 1.2rem 2rem;
+  transition: color 0.2s;
+  width: 100%; text-align: center;
+}
+.overlay-btn:hover, .overlay-btn.active { color: var(--text); }
+.overlay-divider {
+  width: 40px; height: 0.5px;
+  background: var(--line); margin: 0.4rem 0;
+}
+
+/* ── サイト説明帯 ── */
+.site-desc {
+  border-bottom: 0.5px solid var(--line);
+  padding: 0.9rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem;
+}
+.site-desc-text {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(12px, 2vw, 15px);
+  font-weight: 400; letter-spacing: 0.06em;
   color: var(--text);
-  line-height: 1.9;
-  letter-spacing: 0.06em;
-  border-left: 0.5px solid var(--line);
-  padding-left: 2rem;
 }
-@media (max-width: 700px) {
-  .nav-tagline { display: none; }
-  .nav-links { gap: 1rem; }
-  .nav-links a { font-size: 10px; }
-  .nav-logo-img { height: 36px; }
+.site-desc-tagline {
+  font-size: 10px; color: var(--text2);
+  letter-spacing: 0.1em; white-space: nowrap;
 }
-.nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a {
-  font-size: 11px; color: var(--text2); text-decoration: none;
-  letter-spacing: 0.12em; transition: color 0.2s;
-}
-.nav-links a:hover, .nav-links a.active { color: var(--text); }
-
-.hero { padding: 5rem 3rem 4rem; max-width: 960px; }
-.hero-label { font-size: 10px; letter-spacing: 0.2em; color: var(--text2); text-transform: uppercase; margin-bottom: 1rem; }
-.hero-title { font-family: 'Shippori Mincho', serif; font-size: clamp(24px, 4vw, 38px); font-weight: 400; line-height: 1.5; letter-spacing: 0.04em; }
-
-.works-section {
-  border-top: 0.5px solid var(--line);
-  padding: 6rem 4rem;
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.works-section.visible { opacity: 1; transform: none; }
-
-.section-inner {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 3rem;
-  align-items: start;
-}
-@media (max-width: 768px) {
-  .section-inner {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  .section-left {
-    position: static !important;
-  }
+@media (max-width: 500px) {
+  .site-desc-tagline { display: none; }
 }
 
-.section-left {
-  position: sticky;
-  top: 90px;
+/* ── タブコンテンツ ── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── ギャラリーパネル ── */
+.gallery-panel {
+  padding: 2rem 2rem 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
 }
-.section-header {
+.panel-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 0.5px solid var(--line);
+  display: flex; align-items: baseline; gap: 1.2rem;
+}
+.panel-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 18px; font-weight: 400; letter-spacing: 0.06em;
+}
+.panel-count { font-size: 10px; color: var(--text2); letter-spacing: 0.1em; }
+.panel-desc {
+  font-size: 12px; color: var(--text);
+  line-height: 2.2; letter-spacing: 0.04em;
+  white-space: pre-line;
   margin-bottom: 1.5rem;
 }
-.section-title { font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 400; letter-spacing: 0.06em; }
-.section-count { font-size: 10px; color: var(--text2); letter-spacing: 0.1em; margin-top: 6px; }
-.section-desc {
-  font-size: 12px;
-  color: var(--text);
-  line-height: 2.2;
-  letter-spacing: 0.04em;
-  white-space: pre-line;
-  margin-top: 1.2rem;
-  padding-top: 1.2rem;
-  border-top: 0.5px solid var(--line);
+.panel-desc a {
+  color: var(--text2); text-decoration: none;
+  font-size: 11px; letter-spacing: 0.06em;
+  transition: color 0.2s;
 }
+.panel-desc a:hover { color: var(--text); }
 
-.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-@media (max-width: 900px) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
-  nav { padding: 1.2rem 1.5rem; }
-  .hero, .works-section { padding-left: 1.5rem; padding-right: 1.5rem; }
-}
-@media (max-width: 560px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+/* ── グリッド ── */
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+@media (max-width: 800px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 500px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 
 .thumb {
   aspect-ratio: 1 / 1; overflow: hidden; cursor: pointer;
-  background: var(--white); position: relative;
+  background: var(--white);
 }
 .thumb img {
   width: 100%; height: 100%; object-fit: cover; display: block;
@@ -133,7 +185,7 @@ nav {
 .thumb:hover img { transform: scale(1.04); filter: saturate(1.1); }
 .thumb.collapsed { display: none; }
 
-.more-wrap { margin-top: 2rem; display: flex; align-items: center; gap: 1.5rem; }
+.more-wrap { margin-top: 1.5rem; display: flex; align-items: center; gap: 1.5rem; }
 .more-btn {
   background: none; border: 0.5px solid var(--text); color: var(--text);
   font-family: inherit; font-size: 11px; font-weight: 300;
@@ -144,41 +196,132 @@ nav {
 .more-btn.hidden, .more-remaining.hidden { display: none; }
 .more-remaining { font-size: 10px; color: var(--text2); letter-spacing: 0.08em; }
 
-
-/* ── Featured section ── */
-.works-section.featured {
+/* ── about / contact パネル ── */
+.text-panel {
+  padding: 3rem 2rem 5rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.text-panel h2 {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 22px; font-weight: 400; letter-spacing: 0.06em;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.5px solid var(--line);
+}
+.text-panel p {
+  font-size: 13px; line-height: 2.4; letter-spacing: 0.04em;
+  color: var(--text); margin-bottom: 1.2rem;
+}
+.text-panel .label {
+  font-size: 10px; color: var(--text2); letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 0.4rem; margin-top: 1.8rem;
+}
+.contact-form { margin-top: 1.5rem; }
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
   background: var(--white);
-  padding: 7rem 4rem;
+  border: 0.5px solid var(--line);
+  font-family: inherit; font-size: 12px; font-weight: 300;
+  color: var(--text); letter-spacing: 0.04em;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
 }
-.featured-title {
-  font-size: 26px !important;
+.contact-form input:focus,
+.contact-form textarea:focus { border-color: var(--text2); }
+.contact-form textarea { height: 140px; resize: vertical; }
+.contact-form button {
+  background: var(--text); color: var(--bg);
+  border: none; font-family: inherit; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.14em; padding: 12px 32px; cursor: pointer;
+  transition: opacity 0.2s;
 }
-.featured-badge {
-  display: inline-block;
-  margin-left: 12px;
-  font-family: 'Zen Kaku Gothic New', sans-serif;
-  font-size: 10px;
-  font-weight: 300;
-  letter-spacing: 0.2em;
-  color: var(--text2);
-  vertical-align: middle;
-  text-transform: uppercase;
-  border: 0.5px solid var(--text2);
-  padding: 2px 8px;
-  border-radius: 20px;
-}
+.contact-form button:hover { opacity: 0.75; }
 
+/* ── ライトボックス ── */
 #lb {
   display: none; position: fixed; inset: 0; z-index: 999;
-  background: rgba(250,249,247,0.97);
+  background: #faf9f7;
   align-items: center; justify-content: center; flex-direction: column;
 }
 #lb.open { display: flex; }
-#lb-img { max-width: 80vw; max-height: 80vh; object-fit: contain; display: block; }
+#lb-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 95vw;
+  max-height: 85vh;
+}
+#lb-img {
+  max-width: min(72vw, 860px);
+  max-height: 82vh;
+  object-fit: contain;
+  display: block;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+  flex-shrink: 0;
+}
+#lb-info {
+  width: 160px;
+  min-width: 160px;
+  flex-shrink: 0;
+  text-align: left;
+  overflow-y: auto;
+  max-height: 80vh;
+  padding-right: 0.5rem;
+}
+#lb-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 14px; font-weight: 500;
+  letter-spacing: 0.08em; color: var(--text);
+  white-space: pre-line; line-height: 1.7;
+  margin-bottom: 0.8rem; padding-bottom: 0.8rem;
+  border-bottom: 0.5px solid var(--line);
+}
+#lb-desc {
+  font-size: 12px; color: var(--text);
+  line-height: 2; letter-spacing: 0.05em; white-space: pre-line;
+}
+#lb-year {
+  font-size: 10px; color: var(--text);
+  letter-spacing: 0.12em; margin-top: 0.8rem;
+}
+#lb-info:empty { display: none; }
+
+/* 4コマ漫画モード */
+#lb.manga-mode {
+  overflow-y: auto;
+  align-items: flex-start;
+  padding: 3rem 0 2rem;
+}
+#lb.manga-mode #lb-inner {
+  flex-direction: column;
+  align-items: center;
+  max-height: none;
+  width: 100%;
+  margin: 0 auto;
+}
+#lb.manga-mode #lb-img {
+  width: min(90vw, 245px);
+  max-width: min(90vw, 245px);
+  max-height: none !important;
+  height: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+#lb.manga-mode #lb-info {
+  width: min(90vw, 245px);
+  text-align: center;
+  padding: 1rem 0 0;
+}
+#lb.manga-mode #lb-nav { margin-top: 2rem; }
+
 #lb-close {
-  position: fixed; top: 1.8rem; right: 2rem;
+  position: fixed; top: 1.5rem; right: 1.5rem;
   background: none; border: none; color: var(--text2);
-  font-size: 14px; cursor: pointer; letter-spacing: 0.1em;
+  font-size: 13px; cursor: pointer; letter-spacing: 0.1em;
   font-family: inherit; font-weight: 300;
 }
 #lb-close:hover { color: var(--text); }
@@ -190,9 +333,88 @@ nav {
 #lb-prev:hover, #lb-next:hover { color: var(--text); }
 #lb-caption { font-size: 10px; letter-spacing: 0.14em; color: var(--text2); }
 
+@media (max-width: 700px) {
+  #lb-inner { flex-direction: column; gap: 1rem; max-height: 90vh; overflow-y: auto; }
+  #lb-img { max-width: 95vw; max-height: 60vh; }
+  #lb-info { width: 90vw; max-height: none; text-align: center; }
+}
+
+/* ── イントロ画面 ── */
+#intro {
+  position: fixed; inset: 0; z-index: 1000;
+  background: #1c1c1a;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+#intro.hidden { display: none; }
+
+/* 背景イラストスライドショー */
+.intro-bg {
+  position: absolute; inset: 0;
+  display: flex;
+}
+.intro-slide {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 1.2s ease, transform 6s ease;
+}
+.intro-slide.active {
+  opacity: 0.25;
+  transform: scale(1);
+}
+
+/* 短歌テキスト */
+.intro-poem {
+  position: relative; z-index: 2;
+  text-align: center;
+  padding: 2rem;
+}
+.intro-line {
+  display: block;
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(16px, 4vw, 26px);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: #faf9f7;
+  line-height: 2.4;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.intro-line.show {
+  opacity: 1;
+  transform: none;
+}
+
+/* スキップボタン */
+#intro-skip {
+  display: block;
+  margin: 0 auto 2.5rem;
+  background: none; border: 0.5px solid rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.8);
+  font-family: inherit; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.2em; padding: 10px 28px; cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+#intro-skip:hover {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+/* イントロ退場アニメーション */
+#intro.fade-out {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
 footer {
   border-top: 0.5px solid var(--line);
-  padding: 2.5rem 3rem;
+  padding: 2rem 3rem;
   display: flex; justify-content: space-between; align-items: center;
   font-size: 10px; color: var(--text2); letter-spacing: 0.1em;
 }
@@ -200,27 +422,147 @@ footer {
 </head>
 <body>
 
-<nav>
-  <div class="nav-left">
-    <a class="nav-logo" href="index.html">
-      <img src="kari_E-Tone_logo.png" alt="E-Tone" class="nav-logo-img">
-      <span class="nav-logo-text">E-Tone</span>
-    </a>
-    <p class="nav-tagline">合理なく　白紙の上に　描いていく<br>終わることなき　酔狂ひとつ</p>
+<!-- イントロ画面 -->
+<div id="intro">
+  <div class="intro-bg" id="intro-bg"></div>
+  <div class="intro-poem">
+    <button id="intro-skip">skip</button>
+    <span class="intro-line" id="il1">合理なく</span>
+    <span class="intro-line" id="il2">白紙の上に　描いていく</span>
+    <span class="intro-line" id="il3">終わることなき</span>
+    <span class="intro-line" id="il4">酔狂ひとつ</span>
   </div>
-  <ul class="nav-links">
-    <li><a href="works.html" class="active">works</a></li>
-    <li><a href="about.html">about</a></li>
-    <li><a href="contact.html">contact</a></li>
-  </ul>
-</nav>
-
-<div class="hero">
-  <p class="hero-label">works</p>
-  <h1 class="hero-title">眞志喜 徹也の<br>イラスト・漫画作品集</h1>
 </div>
 
-<div id="sections-container"></div>
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="kari_E-Tone_logo.png" alt="E-Tone" class="nav-logo-img">
+    <span class="nav-logo-text">E-Tone</span>
+  </a>
+  <!-- PC用タブバー -->
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="mindmap">似顔絵マインドマップ</button>
+    <button class="tab-btn" data-tab="manga">4コマ漫画</button>
+    <button class="tab-btn" data-tab="chara">キャラクター</button>
+    <button class="tab-btn" data-tab="rakugaki">落書き</button>
+    <button class="tab-btn" data-tab="about">about</button>
+    <button class="tab-btn" data-tab="contact">contact</button>
+  </div>
+  <!-- スマホ用ハンバーガー -->
+  <button class="menu-btn" id="menu-btn" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- サイト説明帯 -->
+<div class="site-desc">
+  <span class="site-desc-text">眞志喜 徹也 ／ イラスト・漫画作品集</span>
+  <span class="site-desc-tagline">合理なく　白紙の上に　描いていく</span>
+</div>
+
+<!-- 全画面オーバーレイ -->
+<div class="overlay" id="overlay">
+  <button class="overlay-btn active" data-tab="mindmap">似顔絵マインドマップ</button>
+  <div class="overlay-divider"></div>
+  <button class="overlay-btn" data-tab="manga">4コマ漫画</button>
+  <div class="overlay-divider"></div>
+  <button class="overlay-btn" data-tab="chara">キャラクター</button>
+  <div class="overlay-divider"></div>
+  <button class="overlay-btn" data-tab="rakugaki">落書き</button>
+  <div class="overlay-divider"></div>
+  <button class="overlay-btn" data-tab="about">about</button>
+  <div class="overlay-divider"></div>
+  <button class="overlay-btn" data-tab="contact">contact</button>
+</div>
+
+<!-- 似顔絵マインドマップ -->
+<div class="tab-panel active" id="panel-mindmap">
+  <div class="gallery-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">似顔絵マインドマップ</h2>
+      <span class="panel-count">14 works</span>
+    </div>
+    <p class="panel-desc">コロナ期に葛藤していた思いを描きました。
+有名人の似顔絵と、マインドマップを組み合わせて、自由に表現した作品です。</p>
+    <div class="grid" id="grid-mindmap"></div>
+    <div class="more-wrap" id="more-mindmap"></div>
+  </div>
+</div>
+
+<!-- 4コマ漫画 -->
+<div class="tab-panel" id="panel-manga">
+  <div class="gallery-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">4コマ漫画</h2>
+      <span class="panel-count">9 works</span>
+    </div>
+    <p class="panel-desc">今もよく描いているのが、「4コマ家族会議」という、我が家のドタバタを表現したものです。
+noteで週３回くらいの頻度で描いています。
+<a href="https://note.com/tetsuyama4ki" target="_blank" rel="noopener">→ note.com/tetsuyama4ki</a></p>
+    <div class="grid" id="grid-manga"></div>
+    <div class="more-wrap" id="more-manga"></div>
+  </div>
+</div>
+
+<!-- キャラクター -->
+<div class="tab-panel" id="panel-chara">
+  <div class="gallery-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">キャラクター</h2>
+      <span class="panel-count">20 works</span>
+    </div>
+    <p class="panel-desc">年賀用のイラスト、野球キャラクターのアニメーションなど。
+依頼を受けて、そろばん塾の看板や、地域のマスコットキャラクターおよびポスターを手がけています。</p>
+    <div class="grid" id="grid-chara"></div>
+    <div class="more-wrap" id="more-chara"></div>
+  </div>
+</div>
+
+<!-- 落書き -->
+<div class="tab-panel" id="panel-rakugaki">
+  <div class="gallery-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">落書き</h2>
+      <span class="panel-count">39 works</span>
+    </div>
+    <p class="panel-desc">思いつくままに描いた落書きと、思いつくままコメントを入れたりしたものです。
+その時思った感情を、表現することが楽しいです。</p>
+    <div class="grid" id="grid-rakugaki"></div>
+    <div class="more-wrap" id="more-rakugaki"></div>
+  </div>
+</div>
+
+<!-- about -->
+<div class="tab-panel" id="panel-about">
+  <div class="text-panel">
+    <h2>about</h2>
+    <p class="label">profile</p>
+    <p>眞志喜 徹也（ましき てつや）。沖縄在住のイラストレーター・漫画家。幼少期から絵を描くことを続け、4コマ漫画・似顔絵・キャラクターデザインなど幅広く手がける。</p>
+    <p class="label">活動</p>
+    <p>日常の家族のひとコマを描いた「4コマ家族会議」をnoteで連載中。地域の子ども会やイベントのポスター・マスコットキャラクター制作なども行っている。</p>
+    <p class="label">使用ツール</p>
+    <p>Procreate / MediBang Paint</p>
+    <p class="label">note</p>
+    <p><a href="https://note.com/tetsuyama4ki" target="_blank" rel="noopener" style="color:var(--text2);">note.com/tetsuyama4ki</a></p>
+  </div>
+</div>
+
+<!-- contact -->
+<div class="tab-panel" id="panel-contact">
+  <div class="text-panel">
+    <h2>contact</h2>
+    <p>お仕事のご依頼・ご相談はこちらからどうぞ。</p>
+    <div class="contact-form">
+      <p class="label">お名前</p>
+      <input type="text" placeholder="山田 太郎">
+      <p class="label">メールアドレス</p>
+      <input type="email" placeholder="example@email.com">
+      <p class="label">メッセージ</p>
+      <textarea placeholder="ご依頼内容をお書きください"></textarea>
+      <button type="button">送信する</button>
+    </div>
+  </div>
+</div>
 
 <footer>
   <span>&copy; E-Tone / 眞志喜 徹也</span>
@@ -229,7 +571,14 @@ footer {
 
 <div id="lb">
   <button id="lb-close">close</button>
-  <img id="lb-img" src="" alt="">
+  <div id="lb-inner">
+    <img id="lb-img" src="" alt="">
+    <div id="lb-info">
+      <p id="lb-title"></p>
+      <p id="lb-desc"></p>
+      <p id="lb-year"></p>
+    </div>
+  </div>
   <div id="lb-nav">
     <button id="lb-prev">&#x2190;</button>
     <span id="lb-caption"></span>
@@ -238,19 +587,17 @@ footer {
 </div>
 
 <script>
-const PREVIEW = 8;
-
-const FEATURED = '似顔絵マインドマップ';
+const PREVIEW = { mindmap: 4, manga: 4, chara: 8, rakugaki: 8 };
 
 const DESCRIPTIONS = {
-  '似顔絵マインドマップ': 'コロナ期に葛藤していた思いを描きました。\n有名人の似顔絵と、\nマインドマップを組み合わせて、\n自由に表現した作品です。',
-  '4コマ漫画': '日常のひとコマを\n家族の視点から切り取った作品集です。\nくすっと笑える、\nありふれた毎日の断片たち。',
-  'キャラクター': 'オリジナルキャラクターと\nアニメーションの作品集です。\n地域の行事や日常をモチーフに、\nキャラクターに命を吹き込んでいます。',
-  '落書き': '思いつくままに描いた、\n制約なきスケッチたち。\n有名人や好きなものを\n自由に、軽やかに。',
+  'mindmap': 'コロナ期に葛藤していた思いを描きました。\n有名人の似顔絵と、マインドマップを組み合わせて、自由に表現した作品です。',
+  'manga': '「4コマ家族会議」',
+  'chara': '年賀用のイラスト、キャラクターデザインなど。',
+  'rakugaki': '思いつくままに描いた落書きたち。',
 };
 
 const DATA = {
-  '似顔絵マインドマップ': [
+  mindmap: [
     'works/mindmap/abesinzo.jpg',
     'works/mindmap/ainsyutain.jpg',
     'works/mindmap/asasyoryu.jpg',
@@ -266,7 +613,7 @@ const DATA = {
     'works/mindmap/YOSHIKI.jpg',
     'works/mindmap/zibun4koma.jpg',
   ],
-  '4コマ漫画': [
+  manga: [
     'works/manga/manga01.jpg',
     'works/manga/manga02.jpg',
     'works/manga/manga03.jpg',
@@ -277,8 +624,8 @@ const DATA = {
     'works/manga/manga08.jpg',
     'works/manga/manga09.jpg',
   ],
-  'キャラクター': [
-    'works/chara/20140504baby in car.jpg',
+  chara: [
+    'works/chara/20140504babyincar.jpg',
     'works/chara/2014nenga.jpg',
     'works/chara/2015nenga.jpg',
     'works/chara/2016nenga.jpg',
@@ -299,7 +646,7 @@ const DATA = {
     'works/chara/onikyudan4.GIF',
     'works/chara/syuko_soroban.jpg',
   ],
-  '落書き': [
+  rakugaki: [
     'works/rakugaki/36oku.jpg',
     'works/rakugaki/bakarizumu.jpg',
     'works/rakugaki/drankmonkey.jpg',
@@ -342,86 +689,270 @@ const DATA = {
   ],
 };
 
-// ※ BMPファイル（mixi8770097.bmp, mixi8780263.bmp）はブラウザ非対応のため除外しています。
-// JPGまたはPNGに変換後、works/rakugaki/ に追加してください。
+const META = {
+  "sawabeyu.jpg": { "title": "「弁当事情」\n（澤部佑）", "desc": "コロナと長女の誕生が同年で、さまざまなパラダイムシフトが起きました。\n私が、家事をし始めた頃です。愛妻家で知られるハライチの澤部さんを描きました。", "year": "2020" },
+  "abesinzo.jpg": { "title": "「難解用語」\n（安倍晋三）", "desc": "コロナが始まった頃、「パンデミック」や「フェーズ」といった今まで聞いたことのない用語が飛び交いました。それと超絶ダサいアベノマスクをメインに描いたと思われます。", "year": "2020" },
+  "ainsyutain.jpg": { "title": "「発見」\n（アインシュタイン）", "desc": "「発見」をテーマに描いたものです。子どもたちが好きな食事がしゃぶしゃぶだったという発見。教育では、優しさは次男がすでに持っていたという発見。などなど、アインシュタインを中心にマインドマップされました。", "year": "2020" },
+  "asasyoryu.jpg": { "title": "「我が家の寝室事情」\n（朝青龍）", "desc": "娘が生まれたばかりの2020年。妻が長女を寝かしつけると、隣にドラえもんの人形を添えます。\n僕は当時、首痛がひどくて寝床に困っており、ハンモックで寝たり試行錯誤をしていました。そんな中、我が家にコオロギが侵入し、毎晩鈴の音に困らされるのでした。", "year": "2020" },
+  "hiro.jpg": { "title": "「コロナ文化」\n（EXILE HIRO）", "desc": "コロナで外食や外遊びがなくなり文化が変わりました。\n私の親戚に飲食店をしている方がいて、少しでも手助けになるようにとTAKE OUTをしていました。\n親戚がEXILEのヒロさんに似ていたため、メインに描いています。", "year": "2020" },
+  "kotouge.jpg": { "title": "「勤務形態」\n（バイキング小峠）", "desc": "働き方が変わりましたね。出社しなくても仕事ができることがわかっちゃった時。\nPCさえ使えれば、どこでも働けます。\nなぜ小峠を描いたか謎です。", "year": "2020" },
+  "kubotamasataka.jpg": { "title": "「有意義な過ごし方」\n（窪田正孝）", "desc": "俳優の窪田正孝さんの趣味が洗車ということを知り、僕たち家族の過ごし方をマインドマップしました。\n描いた日は昭和の日（4/29）だったようです。", "year": "2020" },
+  "mikawayasabu.jpg": { "title": "「瓶ビール」\n（三河屋のサブ）", "desc": "大好きなビールを買いに行くのも、不要不急に携わります。\n瓶ビールをケース買いすることを思いつき、実行しました。\nメリットデメリットを表現し、ビールを届けてくれる三河屋があったらいいなと描きました。", "year": "2020" },
+  "nasubi.jpg": { "title": "「在宅ワーク」\n（なすび）", "desc": "在宅ワークで連想したのが、懸賞生活をしていた、なすびでした。\n当時公務員だった私は、個人情報を持って帰れなくて、時代に乗っかれないモヤモヤがありました。", "year": "2020" },
+  "rokkakuseizi.jpg": { "title": "「ノルマ」\n六角精児", "desc": "在宅ばっかりですが、ノルマ（というかタスク）はあります。\n日用品を買うもの、週に1度。計画的に買い物をしていました。\n繊細な日常を、相棒に出演していた六角精児さんで表現しました。", "year": "2020" },
+  "sasakikuranosuke.jpg": { "title": "「書けない漢字」\n（佐々木蔵之介）", "desc": "「佐」と「在」の字で、部首がどっちがどっちかわからなくなります。\n「在」の部首は「土（つち）」と言うそうで、ここにいますという意味で存在の字を理解しました。\n「佐」のつく有名人「佐々木蔵之介」を昭和風に描きました。", "year": "2020" },
+  "yanagisawaatsushi.jpg": { "title": "「インストール」\n（柳澤敦）", "desc": "柳沢敦の「急にボールが来たので」をなぜモチーフにしたか、今ではわかりません。\nパソコンのソフトや、iPadのアプリが慣れず、嬉しさよりも、モヤモヤが勝った様子です。", "year": "2020" },
+  "YOSHIKI.jpg": { "title": "YOSHIKI", "desc": "当時私の死活問題だった「首痛」。YOSHIKIもきっと悩んでいただろうと描きました。\n原因は日頃の猫背です。これが寝違いによってブーストされ、１週間くらい眠れない悩みを強く表現しています。", "year": "2020" },
+  "zibun4koma.jpg": { "title": "自分4コマ", "desc": "似顔絵マインドマップで、最後に描いたのが「自分」でした。\n漫画を描いてみたいという思いから、まずは4コマ漫画から始めようとイメージを膨らましています。\nこれ以後、4コマ漫画を量産するようになりました。", "year": "2020" },
+  "2014nenga.jpg": { "title": "2014年賀状", "desc": "", "year": "2014" },
+  "2015nenga.jpg": { "title": "2015年賀状", "desc": "", "year": "2015" },
+  "2016nenga.jpg": { "title": "2016年賀状", "desc": "", "year": "2016" },
+  "2017nenga.jpg": { "title": "2017年賀状", "desc": "", "year": "2017" },
+  "2022nenga.jpg": { "title": "2022年賀状", "desc": "", "year": "2022" },
+  "2023nenga.jpg": { "title": "2023年賀状", "desc": "", "year": "2023" },
+  "2025nenga.jpg": { "title": "2025年賀状", "desc": "", "year": "2025" },
+  "2026nenga.jpg": { "title": "2026年賀状", "desc": "", "year": "2026" },
+  "janastar1.gif": { "title": "ジャナミー①", "desc": "", "year": "" },
+  "janastar2.gif": { "title": "ジャナミー②", "desc": "", "year": "" },
+  "janastar3.gif": { "title": "ジャナミー③", "desc": "", "year": "" },
+  "janastar4.gif": { "title": "ジャナミー④", "desc": "", "year": "" },
+  "kazoku.jpg": { "title": "家族", "desc": "", "year": "" },
+  "ojana_honensai.jpg": { "title": "大謝名豊年祭", "desc": "", "year": "" },
+  "onikyudan1.GIF": { "title": "鬼球団①", "desc": "", "year": "" },
+  "onikyudan2.GIF": { "title": "鬼球団②", "desc": "", "year": "" },
+  "onikyudan3.GIF": { "title": "鬼球団③", "desc": "", "year": "" },
+  "onikyudan4.GIF": { "title": "鬼球団④", "desc": "", "year": "" },
+  "syuko_soroban.jpg": { "title": "珠算", "desc": "", "year": "" },
+  "kamenraidaj.jpg": { "title": "仮面ライダー", "desc": "", "year": "" },
+  "smap.jpg": { "title": "SMAP", "desc": "", "year": "" },
+  "hakuho.jpg": { "title": "白鵬", "desc": "", "year": "" },
+};
 
-let lbImages = [];
-let lbIndex = 0;
+// ── イントロアニメーション ──
+const ALL_INTRO_IMAGES = [
+  'works/mindmap/sawabeyu.jpg',
+  'works/mindmap/YOSHIKI.jpg',
+  'works/mindmap/hiro.jpg',
+  'works/mindmap/ainsyutain.jpg',
+  'works/mindmap/nasubi.jpg',
+  'works/mindmap/rokkakuseizi.jpg',
+  'works/chara/2026nenga.jpg',
+  'works/chara/2025nenga.jpg',
+  'works/chara/ojana_honensai.jpg',
+  'works/chara/kazoku.jpg',
+  'works/rakugaki/smap.jpg',
+  'works/rakugaki/hakuho.jpg',
+  'works/rakugaki/kamenraidaj.jpg',
+  'works/rakugaki/tenryu.jpg',
+  'works/rakugaki/nagatomo.jpg',
+];
 
-function render() {
-  const container = document.getElementById('sections-container');
-  Object.entries(DATA).forEach(([cat, images]) => {
-    const preview = images.slice(0, PREVIEW);
-    const rest = images.slice(PREVIEW);
-
-    const section = document.createElement('div');
-    const isFeatured = cat === FEATURED;
-    section.className = 'works-section' + (isFeatured ? ' featured' : '');
-
-    const desc = DESCRIPTIONS[cat] || '';
-    section.innerHTML = `
-      <div class="section-inner">
-        <div class="section-left">
-          <div class="section-header">
-            <h2 class="section-title${isFeatured ? ' featured-title' : ''}">${cat}${isFeatured ? '<span class="featured-badge">featured</span>' : ''}</h2>
-            <div class="section-count">${images.length} works</div>
-          </div>
-          ${desc ? `<p class="section-desc">${desc}</p>` : ''}
-        </div>
-        <div class="section-right">
-          <div class="grid">
-            ${preview.map(src => `
-              <div class="thumb" data-src="${src}" data-cat="${cat}">
-                <img src="${src}" alt="${cat}" loading="lazy">
-              </div>`).join('')}
-            ${rest.map(src => `
-              <div class="thumb collapsed" data-src="${src}" data-cat="${cat}">
-                <img src="${src}" alt="${cat}" loading="lazy">
-              </div>`).join('')}
-          </div>
-          <div class="more-wrap">
-            <button class="more-btn ${rest.length === 0 ? 'hidden' : ''}" data-cat="${cat}">more works</button>
-            <span class="more-remaining ${rest.length === 0 ? 'hidden' : ''}">+${rest.length}</span>
-          </div>
-        </div>
-      </div>
-    `;
-    container.appendChild(section);
-  });
-
-  // More ボタン
-  document.querySelectorAll('.more-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const cat = btn.dataset.cat;
-      btn.closest('.works-section').querySelectorAll('.thumb.collapsed').forEach(t => t.classList.remove('collapsed'));
-      btn.classList.add('hidden');
-      btn.nextElementSibling.classList.add('hidden');
-    });
-  });
-
-  // サムネイルクリック
-  document.querySelectorAll('.thumb').forEach(thumb => {
-    thumb.addEventListener('click', () => {
-      if (thumb.classList.contains('collapsed')) return;
-      const cat = thumb.dataset.cat;
-      lbImages = Array.from(document.querySelectorAll(`.thumb:not(.collapsed)[data-cat="${cat}"]`))
-        .map(t => t.dataset.src);
-      lbIndex = lbImages.indexOf(thumb.dataset.src);
-      openLb();
-    });
-  });
-
-  // スクロールアニメーション
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.works-section').forEach(s => obs.observe(s));
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
+let introSlideTimer = null;
+let introAutoTimer = null;
+
+function playIntro() {
+  const intro = document.getElementById('intro');
+  const bg = document.getElementById('intro-bg');
+
+  clearInterval(introSlideTimer);
+  clearTimeout(introAutoTimer);
+  bg.innerHTML = '';
+  document.querySelectorAll('.intro-line').forEach(l => l.classList.remove('show'));
+  intro.classList.remove('hidden', 'fade-out');
+  document.body.style.overflow = 'hidden';
+
+  // 画像をシャッフルして3枚選ぶ
+  const images = shuffle(ALL_INTRO_IMAGES).slice(0, 3);
+  images.forEach(src => {
+    const div = document.createElement('div');
+    div.className = 'intro-slide';
+    div.style.backgroundImage = `url(${src})`;
+    bg.appendChild(div);
+  });
+  const slides = bg.querySelectorAll('.intro-slide');
+
+  // 画像を均等間隔で切り替え（全体12秒）
+  const totalDuration = 12000;
+  const interval = totalDuration / 3;
+
+  slides.forEach(s => s.classList.remove('active'));
+  slides[0].classList.add('active');
+  [1, 2].forEach(i => {
+    setTimeout(() => {
+      slides.forEach(s => s.classList.remove('active'));
+      slides[i].classList.add('active');
+    }, interval * i);
+  });
+
+  // 短歌フレーズをゆっくりフェードイン
+  const delays = [600, 2600, 4800, 7200];
+  const lineIds = ['il1','il2','il3','il4'];
+  lineIds.forEach((id, i) => {
+    setTimeout(() => {
+      document.getElementById(id).classList.add('show');
+    }, delays[i]);
+  });
+
+  // 「酔狂ひとつ」の後、2.5秒余韻を持たせてからホームへ
+  introAutoTimer = setTimeout(endIntro, 7200 + 2500);
+}
+
+function endIntro() {
+  const intro = document.getElementById('intro');
+  clearInterval(introSlideTimer);
+  clearTimeout(introAutoTimer);
+  intro.classList.add('fade-out');
+  setTimeout(() => {
+    intro.classList.add('hidden');
+    document.body.style.overflow = '';
+  }, 800);
+}
+
+document.getElementById('intro-skip').addEventListener('click', endIntro);
+
+// ロゴクリックでイントロ再生
+document.querySelector('.nav-logo').addEventListener('click', e => {
+  e.preventDefault();
+  playIntro();
+});
+
+// 初回ロード時に再生
+playIntro();
+
+// ── ハンバーガー＆オーバーレイ ──
+const menuBtn = document.getElementById('menu-btn');
+const overlay = document.getElementById('overlay');
+
+menuBtn.addEventListener('click', () => {
+  const isOpen = overlay.classList.toggle('open');
+  menuBtn.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+function switchTab(key) {
+  // パネル切り替え
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + key).classList.add('active');
+  // オーバーレイのactiveボタン更新
+  document.querySelectorAll('.overlay-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === key);
+  });
+  // オーバーレイを閉じる
+  overlay.classList.remove('open');
+  menuBtn.classList.remove('open');
+  document.body.style.overflow = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // グリッド描画
+  if (['mindmap','manga','chara','rakugaki'].includes(key)) buildGrid(key);
+}
+
+document.querySelectorAll('.overlay-btn').forEach(btn => {
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+});
+
+// ── グリッド描画 ──
+function buildGrid(key) {
+  const images = DATA[key];
+  const grid = document.getElementById('grid-' + key);
+  const moreWrap = document.getElementById('more-' + key);
+  if (!grid || grid.children.length > 0) return; // 既に描画済み
+
+  const preview = images.slice(0, PREVIEW[key] || 8);
+  const rest = images.slice(PREVIEW[key] || 8);
+
+  preview.forEach(src => {
+    const div = document.createElement('div');
+    div.className = 'thumb';
+    div.dataset.src = src;
+    div.dataset.cat = key;
+    div.innerHTML = `<img src="${src}" alt="" loading="lazy">`;
+    grid.appendChild(div);
+  });
+  rest.forEach(src => {
+    const div = document.createElement('div');
+    div.className = 'thumb collapsed';
+    div.dataset.src = src;
+    div.dataset.cat = key;
+    div.innerHTML = `<img src="${src}" alt="" loading="lazy">`;
+    grid.appendChild(div);
+  });
+
+  if (rest.length > 0) {
+    moreWrap.innerHTML = `
+      <button class="more-btn" data-key="${key}">more works</button>
+      <span class="more-remaining">+${rest.length}</span>`;
+    moreWrap.querySelector('.more-btn').addEventListener('click', () => {
+      grid.querySelectorAll('.thumb.collapsed').forEach(t => t.classList.remove('collapsed'));
+      moreWrap.innerHTML = '';
+      attachThumbClicks(grid);
+    });
+  }
+
+  attachThumbClicks(grid);
+}
+
+function attachThumbClicks(grid) {
+  grid.querySelectorAll('.thumb:not(.collapsed)').forEach(thumb => {
+    thumb.onclick = () => {
+      const cat = thumb.dataset.cat;
+      lbImages = Array.from(document.querySelectorAll(`#grid-${cat} .thumb:not(.collapsed)`))
+        .map(t => t.dataset.src);
+      lbIndex = lbImages.indexOf(thumb.dataset.src);
+      lbCat = cat;
+      openLb();
+    };
+  });
+}
+
+// PC用タブボタン
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    switchTab(btn.dataset.tab);
+  });
+});
+
+// 初期表示
+buildGrid('mindmap');
+document.querySelectorAll('.overlay-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const key = btn.dataset.tab;
+    if (['mindmap','manga','chara','rakugaki'].includes(key)) buildGrid(key);
+  });
+});
+
+// ── ライトボックス ──
+let lbImages = [];
+let lbIndex = 0;
+let lbCat = '';
+
 function openLb() {
-  document.getElementById('lb-img').src = lbImages[lbIndex];
+  const src = lbImages[lbIndex];
+  const isManga = lbCat === 'manga';
+  const lb = document.getElementById('lb');
+  const img = document.getElementById('lb-img');
+
+  lb.classList.toggle('manga-mode', isManga);
+  img.src = src;
+
   document.getElementById('lb-caption').textContent = (lbIndex + 1) + ' / ' + lbImages.length;
-  document.getElementById('lb').classList.add('open');
+  const fname = src.split('/').pop();
+  const m = META[fname] || {};
+  document.getElementById('lb-title').textContent = m.title || '';
+  document.getElementById('lb-desc').textContent  = m.desc  || '';
+  document.getElementById('lb-year').textContent  = m.year  ? m.year + '年' : '';
+  lb.classList.add('open');
+  if (isManga) lb.scrollTo({ top: 0 });
   document.body.style.overflow = 'hidden';
 }
 function closeLb() {
@@ -443,8 +974,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') moveLb(-1);
   if (e.key === 'ArrowRight') moveLb(1);
 });
-
-render();
 </script>
 </body>
 </html>
