@@ -36,13 +36,13 @@ nav {
   text-decoration: none; color: var(--text);
   flex-shrink: 0;
 }
-.nav-logo-img { height: 40px; width: auto; object-fit: contain; }
+.nav-logo-img { height: 52px; width: auto; object-fit: contain; }
 .nav-logo-text {
   font-family: 'Shippori Mincho', serif;
-  font-size: 14px; font-weight: 500; letter-spacing: 0.1em;
+  font-size: 16px; font-weight: 500; letter-spacing: 0.1em;
 }
 @media (max-width: 600px) {
-  .nav-logo-img { height: 32px; }
+  .nav-logo-img { height: 42px; }
 }
 
 /* ── タブバー（PC用） ── */
@@ -97,6 +97,16 @@ nav {
   gap: 0;
 }
 .overlay.open { display: flex; }
+.overlay-logo {
+  margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.overlay-logo-img { height: 44px; width: auto; object-fit: contain; }
+.overlay-logo-text {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 15px; font-weight: 500; letter-spacing: 0.12em;
+  color: var(--text);
+}
 .overlay-btn {
   background: none; border: none;
   font-family: 'Shippori Mincho', serif;
@@ -167,6 +177,19 @@ nav {
   transition: color 0.2s;
 }
 .panel-desc a:hover { color: var(--text); }
+.panel-desc a.note-link {
+  display: inline-block;
+  font-size: 13px;
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  border-bottom: 1px solid var(--text);
+  padding-bottom: 1px;
+  margin-top: 0.4rem;
+  transition: opacity 0.2s;
+}
+.panel-desc a.note-link:hover { opacity: 0.5; }
 
 /* ── グリッド ── */
 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
@@ -195,6 +218,31 @@ nav {
 .more-btn:hover { background: var(--text); color: var(--bg); }
 .more-btn.hidden, .more-remaining.hidden { display: none; }
 .more-remaining { font-size: 10px; color: var(--text2); letter-spacing: 0.08em; }
+
+/* ── 送信完了メッセージ ── */
+.form-sent {
+  display: none;
+  padding: 2rem 0;
+  text-align: center;
+}
+.form-sent.show { display: block; }
+.form-sent-icon {
+  font-size: 28px;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+.form-sent p {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+.form-sent small {
+  font-size: 11px;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+}
 
 /* ── about / contact パネル ── */
 .text-panel {
@@ -371,6 +419,14 @@ nav {
   position: relative; z-index: 2;
   text-align: center;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.intro-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .intro-line {
   display: block;
@@ -387,6 +443,34 @@ nav {
 .intro-line.show {
   opacity: 1;
   transform: none;
+}
+.intro-logo {
+  margin-top: 2.2rem;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.intro-logo.show {
+  opacity: 1;
+  transform: none;
+}
+.intro-logo img {
+  height: clamp(80px, 18vw, 130px);
+  width: auto;
+  filter: brightness(0) invert(1);
+  display: block;
+  margin-bottom: 0;
+}
+.intro-logo-name {
+  display: block;
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(13px, 3vw, 18px);
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  color: #faf9f7;
+  text-align: center;
+  margin-top: 0.6rem;
+  line-height: 1;
 }
 
 /* スキップボタン */
@@ -427,16 +511,22 @@ footer {
   <div class="intro-bg" id="intro-bg"></div>
   <div class="intro-poem">
     <button id="intro-skip">skip</button>
-    <span class="intro-line" id="il1">合理なく</span>
-    <span class="intro-line" id="il2">白紙の上に　描いていく</span>
-    <span class="intro-line" id="il3">終わることなき</span>
-    <span class="intro-line" id="il4">酔狂ひとつ</span>
+    <div class="intro-lines">
+      <span class="intro-line" id="il1">合理なく</span>
+      <span class="intro-line" id="il2">白紙の上に　描いていく</span>
+      <span class="intro-line" id="il3">終わることなき</span>
+      <span class="intro-line" id="il4">酔狂ひとつ</span>
+    </div>
+    <div class="intro-logo" id="intro-logo">
+      <img src="E-toneロゴ.png" alt="E-Tone">
+      <span class="intro-logo-name">E-Tone</span>
+    </div>
   </div>
 </div>
 
 <nav>
   <a class="nav-logo" href="#">
-    <img src="kari_E-Tone_logo.png" alt="E-Tone" class="nav-logo-img">
+    <img src="E-toneロゴ.png" alt="E-Tone" class="nav-logo-img">
     <span class="nav-logo-text">E-Tone</span>
   </a>
   <!-- PC用タブバー -->
@@ -462,6 +552,10 @@ footer {
 
 <!-- 全画面オーバーレイ -->
 <div class="overlay" id="overlay">
+  <div class="overlay-logo">
+    <img src="E-toneロゴ.png" alt="E-Tone" class="overlay-logo-img">
+    <span class="overlay-logo-text">E-Tone</span>
+  </div>
   <button class="overlay-btn active" data-tab="mindmap">似顔絵マインドマップ</button>
   <div class="overlay-divider"></div>
   <button class="overlay-btn" data-tab="manga">4コマ漫画</button>
@@ -498,7 +592,7 @@ footer {
     </div>
     <p class="panel-desc">今もよく描いているのが、「4コマ家族会議」という、我が家のドタバタを表現したものです。
 noteで週３回くらいの頻度で描いています。
-<a href="https://note.com/tetsuyama4ki" target="_blank" rel="noopener">→ note.com/tetsuyama4ki</a></p>
+<a class="note-link" href="https://note.com/tetsuyama4ki" target="_blank" rel="noopener">→ note.com/tetsuyama4ki</a></p>
     <div class="grid" id="grid-manga"></div>
     <div class="more-wrap" id="more-manga"></div>
   </div>
@@ -509,7 +603,7 @@ noteで週３回くらいの頻度で描いています。
   <div class="gallery-panel">
     <div class="panel-header">
       <h2 class="panel-title">キャラクター</h2>
-      <span class="panel-count">20 works</span>
+      <span class="panel-count">25 works</span>
     </div>
     <p class="panel-desc">年賀用のイラスト、野球キャラクターのアニメーションなど。
 依頼を受けて、そろばん塾の看板や、地域のマスコットキャラクターおよびポスターを手がけています。</p>
@@ -536,10 +630,9 @@ noteで週３回くらいの頻度で描いています。
 <div class="tab-panel" id="panel-about">
   <div class="text-panel">
     <h2>about</h2>
-    <p class="label">profile</p>
-    <p>眞志喜 徹也（ましき てつや）。沖縄在住のイラストレーター・漫画家。幼少期から絵を描くことを続け、4コマ漫画・似顔絵・キャラクターデザインなど幅広く手がける。</p>
+    <img src="プロフィール.png" alt="プロフィール" style="width:100%; height:auto; display:block; margin-bottom:2rem;">
     <p class="label">活動</p>
-    <p>日常の家族のひとコマを描いた「4コマ家族会議」をnoteで連載中。地域の子ども会やイベントのポスター・マスコットキャラクター制作なども行っている。</p>
+    <img src="活動内容.png" alt="活動説明" style="width:100%; height:auto; display:block; margin-top:0.8rem;">
     <p class="label">使用ツール</p>
     <p>Procreate / MediBang Paint</p>
     <p class="label">note</p>
@@ -552,15 +645,26 @@ noteで週３回くらいの頻度で描いています。
   <div class="text-panel">
     <h2>contact</h2>
     <p>お仕事のご依頼・ご相談はこちらからどうぞ。</p>
-    <div class="contact-form">
-      <p class="label">お名前</p>
-      <input type="text" placeholder="山田 太郎">
-      <p class="label">メールアドレス</p>
-      <input type="email" placeholder="example@email.com">
-      <p class="label">メッセージ</p>
-      <textarea placeholder="ご依頼内容をお書きください"></textarea>
-      <button type="button">送信する</button>
+
+    <!-- 送信完了メッセージ -->
+    <div class="form-sent" id="form-sent">
+      <div class="form-sent-icon">✉</div>
+      <p>送信しました</p>
+      <small>内容を確認の上、折り返しご連絡いたします。</small>
     </div>
+
+    <!-- フォーム本体 -->
+    <form class="contact-form" id="contact-form"
+          action="https://formspree.io/f/xeevpgkq"
+          method="POST">
+      <p class="label">お名前 <span style="color:var(--text2);font-size:9px;letter-spacing:0.05em;">必須</span></p>
+      <input type="text" name="name" placeholder="山田 太郎" required>
+      <p class="label">メールアドレス <span style="color:var(--text2);font-size:9px;letter-spacing:0.05em;">必須</span></p>
+      <input type="email" name="email" placeholder="example@email.com" required>
+      <p class="label">メッセージ <span style="color:var(--text2);font-size:9px;letter-spacing:0.05em;">必須</span></p>
+      <textarea name="message" placeholder="ご依頼内容をお書きください" required></textarea>
+      <button type="submit" id="contact-submit">送信する</button>
+    </form>
   </div>
 </div>
 
@@ -599,34 +703,42 @@ const DESCRIPTIONS = {
 const DATA = {
   mindmap: [
     'works/mindmap/abesinzo.jpg',
+    'works/mindmap/sawabeyu.jpg',
+    'works/mindmap/mikawayasabu.jpg',
+    'works/mindmap/zibun4koma.jpg',
     'works/mindmap/ainsyutain.jpg',
     'works/mindmap/asasyoryu.jpg',
     'works/mindmap/hiro.jpg',
     'works/mindmap/kotouge.jpg',
     'works/mindmap/kubotamasataka.jpg',
-    'works/mindmap/mikawayasabu.jpg',
     'works/mindmap/nasubi.jpg',
     'works/mindmap/rokkakuseizi.jpg',
     'works/mindmap/sasakikuranosuke.jpg',
-    'works/mindmap/sawabeyu.jpg',
     'works/mindmap/yanagisawaatsushi.jpg',
     'works/mindmap/YOSHIKI.jpg',
-    'works/mindmap/zibun4koma.jpg',
   ],
   manga: [
-    'works/manga/manga01.jpg',
-    'works/manga/manga02.jpg',
+    'works/manga/manga07.jpg',
     'works/manga/manga03.jpg',
     'works/manga/manga04.jpg',
+    'works/manga/manga09.jpg',
+    'works/manga/manga01.jpg',
+    'works/manga/manga02.jpg',
     'works/manga/manga05.jpg',
     'works/manga/manga06.jpg',
-    'works/manga/manga07.jpg',
     'works/manga/manga08.jpg',
-    'works/manga/manga09.jpg',
   ],
   chara: [
-    'works/chara/20140504babyincar.jpg',
+    'works/chara/gazyumarusoroban.jpeg',
+    'works/chara/zyanashishikusakari.jpg',
+    'works/chara/janastar1.gif',
+    'works/chara/onikyudan4.GIF',
+    'works/chara/welcomeboad.jpg',
     'works/chara/2014nenga.jpg',
+    'works/chara/ojanaakimaturi.jpg',
+    'works/chara/syuko_soroban.jpg',
+    'works/chara/ojana_honensai.jpg',
+    'works/chara/20140504babyincar.jpg',
     'works/chara/2015nenga.jpg',
     'works/chara/2016nenga.jpg',
     'works/chara/2017nenga.jpg',
@@ -634,17 +746,14 @@ const DATA = {
     'works/chara/2023nenga.jpg',
     'works/chara/2025nenga.jpg',
     'works/chara/2026nenga.jpg',
-    'works/chara/janastar1.gif',
     'works/chara/janastar2.gif',
     'works/chara/janastar3.gif',
     'works/chara/janastar4.gif',
     'works/chara/kazoku.jpg',
-    'works/chara/ojana_honensai.jpg',
     'works/chara/onikyudan1.GIF',
     'works/chara/onikyudan2.GIF',
     'works/chara/onikyudan3.GIF',
-    'works/chara/onikyudan4.GIF',
-    'works/chara/syuko_soroban.jpg',
+    'works/chara/zyanashishitaki.jpg',
   ],
   rakugaki: [
     'works/rakugaki/36oku.jpg',
@@ -722,7 +831,12 @@ const META = {
   "onikyudan2.GIF": { "title": "鬼球団②", "desc": "", "year": "" },
   "onikyudan3.GIF": { "title": "鬼球団③", "desc": "", "year": "" },
   "onikyudan4.GIF": { "title": "鬼球団④", "desc": "", "year": "" },
-  "syuko_soroban.jpg": { "title": "珠算", "desc": "", "year": "" },
+  "syuko_soroban.jpg": { "title": "珠算", "desc": "友人からの依頼で、塾の看板イメージを作成しました。", "year": "" },
+  "gazyumarusoroban.jpeg": { "title": "がじゅまるそろばん塾", "desc": "友人からの依頼で、塾の看板イメージを作成しました。", "year": "" },
+  "welcomeboad.jpg": { "title": "結婚式ウェルカムボード", "desc": "親戚からの依頼で、作成しました。\nあいみょんと、スパイファミリーが好きな家族だったので、これらをミックスさせました。", "year": "" },
+  "ojanaakimaturi.jpg": { "title": "あきまつりポスター", "desc": "", "year": "" },
+  "zyanashishikusakari.jpg": { "title": "ジャナシシくん", "desc": "自治会のマスコットキャラクターです。", "year": "" },
+  "zyanashishitaki.jpg": { "title": "ジャナシシポスター", "desc": "", "year": "" },
   "kamenraidaj.jpg": { "title": "仮面ライダー", "desc": "", "year": "" },
   "smap.jpg": { "title": "SMAP", "desc": "", "year": "" },
   "hakuho.jpg": { "title": "白鵬", "desc": "", "year": "" },
@@ -730,21 +844,74 @@ const META = {
 
 // ── イントロアニメーション ──
 const ALL_INTRO_IMAGES = [
+  // 似顔絵マインドマップ（全14枚）
   'works/mindmap/sawabeyu.jpg',
-  'works/mindmap/YOSHIKI.jpg',
-  'works/mindmap/hiro.jpg',
+  'works/mindmap/abesinzo.jpg',
   'works/mindmap/ainsyutain.jpg',
+  'works/mindmap/asasyoryu.jpg',
+  'works/mindmap/hiro.jpg',
+  'works/mindmap/kotouge.jpg',
+  'works/mindmap/kubotamasataka.jpg',
+  'works/mindmap/mikawayasabu.jpg',
   'works/mindmap/nasubi.jpg',
   'works/mindmap/rokkakuseizi.jpg',
-  'works/chara/2026nenga.jpg',
+  'works/mindmap/sasakikuranosuke.jpg',
+  'works/mindmap/yanagisawaatsushi.jpg',
+  'works/mindmap/YOSHIKI.jpg',
+  'works/mindmap/zibun4koma.jpg',
+  // キャラクター（GIF除く）
+  'works/chara/20140504babyincar.jpg',
+  'works/chara/2014nenga.jpg',
+  'works/chara/2015nenga.jpg',
+  'works/chara/2016nenga.jpg',
+  'works/chara/2017nenga.jpg',
+  'works/chara/2022nenga.jpg',
+  'works/chara/2023nenga.jpg',
   'works/chara/2025nenga.jpg',
-  'works/chara/ojana_honensai.jpg',
+  'works/chara/2026nenga.jpg',
   'works/chara/kazoku.jpg',
-  'works/rakugaki/smap.jpg',
+  'works/chara/ojana_honensai.jpg',
+  'works/chara/syuko_soroban.jpg',
+  // 落書き（全39枚）
+  'works/rakugaki/36oku.jpg',
+  'works/rakugaki/bakarizumu.jpg',
+  'works/rakugaki/drankmonkey.jpg',
+  'works/rakugaki/eguzeido.jpg',
+  'works/rakugaki/gussan.jpg',
   'works/rakugaki/hakuho.jpg',
+  'works/rakugaki/hondakeisuke.jpg',
+  'works/rakugaki/hurutachi.jpg',
+  'works/rakugaki/kagawateruyuki.jpg',
+  'works/rakugaki/kajisakku.jpg',
   'works/rakugaki/kamenraidaj.jpg',
-  'works/rakugaki/tenryu.jpg',
+  'works/rakugaki/kingdomoji.jpg',
+  'works/rakugaki/messhi.jpg',
+  'works/rakugaki/mixi8201330.png',
+  'works/rakugaki/mixi8204067.png',
+  'works/rakugaki/mixi8279537.png',
+  'works/rakugaki/mixi8281112.png',
+  'works/rakugaki/mixi8335173.png',
+  'works/rakugaki/mixi8851838.png',
   'works/rakugaki/nagatomo.jpg',
+  'works/rakugaki/nakamurashinsuke.jpg',
+  'works/rakugaki/nakanishimanabu.jpg',
+  'works/rakugaki/nomurakatsuya.jpg',
+  'works/rakugaki/okazakisinzi.jpg',
+  'works/rakugaki/projectA.jpg',
+  'works/rakugaki/ragubidaihyo.jpeg',
+  'works/rakugaki/rainmaker.jpg',
+  'works/rakugaki/ranbo.jpg',
+  'works/rakugaki/rosamotard.jpeg',
+  'works/rakugaki/smap.jpg',
+  'works/rakugaki/syokakunren.jpg',
+  'works/rakugaki/takadanobuhiko.jpg',
+  'works/rakugaki/tanahasshi.jpg',
+  'works/rakugaki/tenryu.jpg',
+  'works/rakugaki/tutugo.jpg',
+  'works/rakugaki/yamashitashinzi.jpg',
+  'works/rakugaki/yoshidasaori.jpg',
+  'works/rakugaki/ziou.jpg',
+  'works/rakugaki/zyokobichi.jpg',
 ];
 
 function shuffle(arr) {
@@ -767,6 +934,7 @@ function playIntro() {
   clearTimeout(introAutoTimer);
   bg.innerHTML = '';
   document.querySelectorAll('.intro-line').forEach(l => l.classList.remove('show'));
+  document.getElementById('intro-logo').classList.remove('show');
   intro.classList.remove('hidden', 'fade-out');
   document.body.style.overflow = 'hidden';
 
@@ -802,8 +970,13 @@ function playIntro() {
     }, delays[i]);
   });
 
-  // 「酔狂ひとつ」の後、2.5秒余韻を持たせてからホームへ
-  introAutoTimer = setTimeout(endIntro, 7200 + 2500);
+  // 最後の句の後、1.2秒でロゴをフェードイン
+  setTimeout(() => {
+    document.getElementById('intro-logo').classList.add('show');
+  }, 7200 + 1200);
+
+  // ロゴ表示（7200+1200）の後、2秒余韻を持たせてからホームへ
+  introAutoTimer = setTimeout(endIntro, 7200 + 1200 + 2000);
 }
 
 function endIntro() {
@@ -904,7 +1077,7 @@ function attachThumbClicks(grid) {
   grid.querySelectorAll('.thumb:not(.collapsed)').forEach(thumb => {
     thumb.onclick = () => {
       const cat = thumb.dataset.cat;
-      lbImages = Array.from(document.querySelectorAll(`#grid-${cat} .thumb:not(.collapsed)`))
+      lbImages = Array.from(document.querySelectorAll(`#grid-${cat} .thumb`))
         .map(t => t.dataset.src);
       lbIndex = lbImages.indexOf(thumb.dataset.src);
       lbCat = cat;
@@ -962,6 +1135,37 @@ function closeLb() {
 function moveLb(dir) {
   lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
   openLb();
+}
+
+// ── contact フォーム送信 ──
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('contact-submit');
+    btn.textContent = '送信中…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        contactForm.style.display = 'none';
+        document.getElementById('form-sent').classList.add('show');
+      } else {
+        btn.textContent = '送信する';
+        btn.disabled = false;
+        alert('送信に失敗しました。しばらく経ってから再度お試しください。');
+      }
+    } catch {
+      btn.textContent = '送信する';
+      btn.disabled = false;
+      alert('通信エラーが発生しました。');
+    }
+  });
 }
 
 document.getElementById('lb-close').addEventListener('click', closeLb);
