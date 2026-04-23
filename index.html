@@ -588,7 +588,7 @@ footer {
   <div class="gallery-panel">
     <div class="panel-header">
       <h2 class="panel-title">4コマ漫画</h2>
-      <span class="panel-count">9 works</span>
+      <span class="panel-count">13 works</span>
     </div>
     <p class="panel-desc">今もよく描いているのが、「4コマ家族会議」という、我が家のドタバタを表現したものです。
 noteで週３回くらいの頻度で描いています。
@@ -603,7 +603,7 @@ noteで週３回くらいの頻度で描いています。
   <div class="gallery-panel">
     <div class="panel-header">
       <h2 class="panel-title">キャラクター</h2>
-      <span class="panel-count">25 works</span>
+      <span class="panel-count">22 works</span>
     </div>
     <p class="panel-desc">年賀用のイラスト、野球キャラクターのアニメーションなど。
 依頼を受けて、そろばん塾の看板や、地域のマスコットキャラクターおよびポスターを手がけています。</p>
@@ -617,7 +617,7 @@ noteで週３回くらいの頻度で描いています。
   <div class="gallery-panel">
     <div class="panel-header">
       <h2 class="panel-title">落書き</h2>
-      <span class="panel-count">39 works</span>
+      <span class="panel-count">35 works</span>
     </div>
     <p class="panel-desc">思いつくままに描いた落書きと、思いつくままコメントを入れたりしたものです。
 その時思った感情を、表現することが楽しいです。</p>
@@ -718,6 +718,8 @@ const DATA = {
     'works/mindmap/YOSHIKI.jpg',
   ],
   manga: [
+    'works/manga/manga_bunsu.jpg',
+    'works/manga/manga_kyariakyoiku.jpg',
     'works/manga/manga07.jpg',
     'works/manga/manga03.jpg',
     'works/manga/manga04.jpg',
@@ -727,6 +729,8 @@ const DATA = {
     'works/manga/manga05.jpg',
     'works/manga/manga06.jpg',
     'works/manga/manga08.jpg',
+    'works/manga/manga_basuke.jpg',
+    'works/manga/manga_panto.jpg',
   ],
   chara: [
     'works/chara/gazyumarusoroban.jpeg',
@@ -738,7 +742,6 @@ const DATA = {
     'works/chara/ojanaakimaturi.jpg',
     'works/chara/syuko_soroban.jpg',
     'works/chara/ojana_honensai.jpg',
-    'works/chara/20140504babyincar.jpg',
     'works/chara/2015nenga.jpg',
     'works/chara/2016nenga.jpg',
     'works/chara/2017nenga.jpg',
@@ -771,10 +774,8 @@ const DATA = {
     'works/rakugaki/messhi.jpg',
     'works/rakugaki/mixi8201330.png',
     'works/rakugaki/mixi8204067.png',
-    'works/rakugaki/mixi8279537.png',
     'works/rakugaki/mixi8281112.png',
     'works/rakugaki/mixi8335173.png',
-    'works/rakugaki/mixi8851838.png',
     'works/rakugaki/nagatomo.jpg',
     'works/rakugaki/nakamurashinsuke.jpg',
     'works/rakugaki/nakanishimanabu.jpg',
@@ -801,18 +802,31 @@ const DATA = {
 const META = {
   "sawabeyu.jpg": { "title": "「弁当事情」\n（澤部佑）", "desc": "コロナと長女の誕生が同年で、さまざまなパラダイムシフトが起きました。\n私が、家事をし始めた頃です。愛妻家で知られるハライチの澤部さんを描きました。", "year": "2020" },
   "abesinzo.jpg": { "title": "「難解用語」\n（安倍晋三）", "desc": "コロナが始まった頃、「パンデミック」や「フェーズ」といった今まで聞いたことのない用語が飛び交いました。それと超絶ダサいアベノマスクをメインに描いたと思われます。", "year": "2020" },
-  "ainsyutain.jpg": { "title": "「発見」\n（アインシュタイン）", "desc": "「発見」をテーマに描いたものです。子どもたちが好きな食事がしゃぶしゃぶだったという発見。教育では、優しさは次男がすでに持っていたという発見。などなど、アインシュタインを中心にマインドマップされました。", "year": "2020" },
-  "asasyoryu.jpg": { "title": "「我が家の寝室事情」\n（朝青龍）", "desc": "娘が生まれたばかりの2020年。妻が長女を寝かしつけると、隣にドラえもんの人形を添えます。\n僕は当時、首痛がひどくて寝床に困っており、ハンモックで寝たり試行錯誤をしていました。そんな中、我が家にコオロギが侵入し、毎晩鈴の音に困らされるのでした。", "year": "2020" },
-  "hiro.jpg": { "title": "「コロナ文化」\n（EXILE HIRO）", "desc": "コロナで外食や外遊びがなくなり文化が変わりました。\n私の親戚に飲食店をしている方がいて、少しでも手助けになるようにとTAKE OUTをしていました。\n親戚がEXILEのヒロさんに似ていたため、メインに描いています。", "year": "2020" },
+  "ainsyutain.jpg": { "title": "「発見」\n（アインシュタイン）", "desc": "「発見」をテーマに描いたものです。子どもたちが好きな食事が、しゃぶしゃぶだったという発見。教育では、優しさは次男がすでに持っていたという発見。などなど、アインシュタインを中心に、マインドマップされました。", "year": "2020" },
+  "asasyoryu.jpg": { "title": "「我が家の寝室事情」\n（朝青龍）", "desc": "娘が生まれたばかりの2020年。妻が長女を寝かしつけると、隣にドラえもんの人形を添えます。\n僕は当時、首痛がひどくて寝床に困っており、ハンモックで寝たり試行錯誤をしていました。そんな中、我が家にコオロギが侵入し、毎晩鈴の音に困らされるのでした。コオロギの大自然をドルジ（朝青龍の本名）で表現したようです。", "year": "2020" },
+  "hiro.jpg": { "title": "「コロナ文化」\n（EXILE HIRO）", "desc": "コロナで外食や外遊びがなくなり文化が変わりました。\n私の親戚に、飲食店をしている方がいて、少しでも手助けになるようにと、TAKE OUTをしていました。\n親戚がEXILEのヒロさんに似ていたため、メインに描いています。", "year": "2020" },
   "kotouge.jpg": { "title": "「勤務形態」\n（バイキング小峠）", "desc": "働き方が変わりましたね。出社しなくても仕事ができることがわかっちゃった時。\nPCさえ使えれば、どこでも働けます。\nなぜ小峠を描いたか謎です。", "year": "2020" },
   "kubotamasataka.jpg": { "title": "「有意義な過ごし方」\n（窪田正孝）", "desc": "俳優の窪田正孝さんの趣味が洗車ということを知り、僕たち家族の過ごし方をマインドマップしました。\n描いた日は昭和の日（4/29）だったようです。", "year": "2020" },
   "mikawayasabu.jpg": { "title": "「瓶ビール」\n（三河屋のサブ）", "desc": "大好きなビールを買いに行くのも、不要不急に携わります。\n瓶ビールをケース買いすることを思いつき、実行しました。\nメリットデメリットを表現し、ビールを届けてくれる三河屋があったらいいなと描きました。", "year": "2020" },
   "nasubi.jpg": { "title": "「在宅ワーク」\n（なすび）", "desc": "在宅ワークで連想したのが、懸賞生活をしていた、なすびでした。\n当時公務員だった私は、個人情報を持って帰れなくて、時代に乗っかれないモヤモヤがありました。", "year": "2020" },
   "rokkakuseizi.jpg": { "title": "「ノルマ」\n六角精児", "desc": "在宅ばっかりですが、ノルマ（というかタスク）はあります。\n日用品を買うもの、週に1度。計画的に買い物をしていました。\n繊細な日常を、相棒に出演していた六角精児さんで表現しました。", "year": "2020" },
-  "sasakikuranosuke.jpg": { "title": "「書けない漢字」\n（佐々木蔵之介）", "desc": "「佐」と「在」の字で、部首がどっちがどっちかわからなくなります。\n「在」の部首は「土（つち）」と言うそうで、ここにいますという意味で存在の字を理解しました。\n「佐」のつく有名人「佐々木蔵之介」を昭和風に描きました。", "year": "2020" },
-  "yanagisawaatsushi.jpg": { "title": "「インストール」\n（柳澤敦）", "desc": "柳沢敦の「急にボールが来たので」をなぜモチーフにしたか、今ではわかりません。\nパソコンのソフトや、iPadのアプリが慣れず、嬉しさよりも、モヤモヤが勝った様子です。", "year": "2020" },
-  "YOSHIKI.jpg": { "title": "YOSHIKI", "desc": "当時私の死活問題だった「首痛」。YOSHIKIもきっと悩んでいただろうと描きました。\n原因は日頃の猫背です。これが寝違いによってブーストされ、１週間くらい眠れない悩みを強く表現しています。", "year": "2020" },
-  "zibun4koma.jpg": { "title": "自分4コマ", "desc": "似顔絵マインドマップで、最後に描いたのが「自分」でした。\n漫画を描いてみたいという思いから、まずは4コマ漫画から始めようとイメージを膨らましています。\nこれ以後、4コマ漫画を量産するようになりました。", "year": "2020" },
+  "sasakikuranosuke.jpg": { "title": "「書けない漢字」\n（佐々木蔵之介）", "desc": "「佐」と「在」の字で、部首がどっちがどっちかわからなくなります。\n「在」の部首は、「土（つち）」と言うそうで、ここにいますと言う意味で存在の字を理解しました。\n「佐」のつく有名人「佐々木蔵之介」を昭和風に描きました。", "year": "2020" },
+  "yanagisawaatsushi.jpg": { "title": "「インストール」\n（柳澤敦）", "desc": "柳沢敦の「急にボールが来たので」をなぜモチーフにしたか、今ではわかりません。\nパソコンのソフトや、iPadのアプリが慣れなず、嬉しさよりも、モヤモヤが勝った様子です。", "year": "2020" },
+  "YOSHIKI.jpg": { "title": "YOSHIKI", "desc": "当時私の死活問題だった「首痛」YOSHIKIもきっと悩んでいただろうと描きました。\n原因は日頃の猫背です。これが寝違いによってブーストされ、１週間くらい眠れない悩みを強く表現しています。", "year": "2020" },
+  "zibun4koma.jpg": { "title": "自分4コマ", "desc": "似顔絵マインドマップで、最後に描いたのが、「自分」でした。\n漫画を描いてみたいという思いから、まずは4コマ漫画から始めようと、イメージを膨らましています。\nこれ以後、4コマ漫画を量産するようになりました。", "year": "2020" },
+  "manga01.jpg": { "title": "UNO", "desc": "", "year": "2026" },
+  "manga02.jpg": { "title": "手荒れ", "desc": "", "year": "2026" },
+  "manga03.jpg": { "title": "RUNNING", "desc": "", "year": "2026" },
+  "manga04.jpg": { "title": "世界史が面白い", "desc": "", "year": "2026" },
+  "manga05.jpg": { "title": "クレーンゲーム", "desc": "", "year": "2026" },
+  "manga06.jpg": { "title": "社会が面白い", "desc": "", "year": "2026" },
+  "manga07.jpg": { "title": "監視家族社会", "desc": "", "year": "2026" },
+  "manga08.jpg": { "title": "スマホストレス", "desc": "", "year": "2026" },
+  "manga09.jpg": { "title": "食欲おばけ", "desc": "", "year": "2026" },
+  "manga_basuke.jpg": { "title": "カオスバスケ", "desc": "", "year": "" },
+  "manga_bunsu.jpg": { "title": "分数", "desc": "", "year": "" },
+  "manga_kyariakyoiku.jpg": { "title": "キャリア教育", "desc": "ある会社のキャリア教育事業のLP（ライティングページ）で、キャリア教育について説明をするために、4コマ漫画を描きました。", "year": "" },
+  "manga_panto.jpg": { "title": "パントマイム", "desc": "", "year": "" },
   "2014nenga.jpg": { "title": "2014年賀状", "desc": "", "year": "2014" },
   "2015nenga.jpg": { "title": "2015年賀状", "desc": "", "year": "2015" },
   "2016nenga.jpg": { "title": "2016年賀状", "desc": "", "year": "2016" },
@@ -821,16 +835,16 @@ const META = {
   "2023nenga.jpg": { "title": "2023年賀状", "desc": "", "year": "2023" },
   "2025nenga.jpg": { "title": "2025年賀状", "desc": "", "year": "2025" },
   "2026nenga.jpg": { "title": "2026年賀状", "desc": "", "year": "2026" },
-  "janastar1.gif": { "title": "ジャナミー①", "desc": "", "year": "" },
-  "janastar2.gif": { "title": "ジャナミー②", "desc": "", "year": "" },
-  "janastar3.gif": { "title": "ジャナミー③", "desc": "", "year": "" },
-  "janastar4.gif": { "title": "ジャナミー④", "desc": "", "year": "" },
-  "kazoku.jpg": { "title": "家族", "desc": "", "year": "" },
+  "janastar1.gif": { "title": "ジャナスター1", "desc": "", "year": "2025" },
+  "janastar2.gif": { "title": "ジャナスター2", "desc": "", "year": "2025" },
+  "janastar3.gif": { "title": "ジャナスター3", "desc": "", "year": "2025" },
+  "janastar4.gif": { "title": "ジャナスター4", "desc": "", "year": "2025" },
+  "kazoku.jpg": { "title": "1ページ漫画「夢」", "desc": "", "year": "2024" },
   "ojana_honensai.jpg": { "title": "大謝名豊年祭", "desc": "", "year": "" },
-  "onikyudan1.GIF": { "title": "鬼球団①", "desc": "", "year": "" },
-  "onikyudan2.GIF": { "title": "鬼球団②", "desc": "", "year": "" },
-  "onikyudan3.GIF": { "title": "鬼球団③", "desc": "", "year": "" },
-  "onikyudan4.GIF": { "title": "鬼球団④", "desc": "", "year": "" },
+  "onikyudan1.GIF": { "title": "鬼球団①", "desc": "", "year": "2025" },
+  "onikyudan2.GIF": { "title": "鬼球団②", "desc": "", "year": "2025" },
+  "onikyudan3.GIF": { "title": "鬼球団③", "desc": "", "year": "2025" },
+  "onikyudan4.GIF": { "title": "鬼球団④", "desc": "", "year": "2025" },
   "syuko_soroban.jpg": { "title": "珠算", "desc": "友人からの依頼で、塾の看板イメージを作成しました。", "year": "" },
   "gazyumarusoroban.jpeg": { "title": "がじゅまるそろばん塾", "desc": "友人からの依頼で、塾の看板イメージを作成しました。", "year": "" },
   "welcomeboad.jpg": { "title": "結婚式ウェルカムボード", "desc": "親戚からの依頼で、作成しました。\nあいみょんと、スパイファミリーが好きな家族だったので、これらをミックスさせました。", "year": "" },
@@ -840,6 +854,10 @@ const META = {
   "kamenraidaj.jpg": { "title": "仮面ライダー", "desc": "", "year": "" },
   "smap.jpg": { "title": "SMAP", "desc": "", "year": "" },
   "hakuho.jpg": { "title": "白鵬", "desc": "", "year": "" },
+  "mixi8201330.png": { "title": "", "desc": "mixiで当時描いたもの。マウスで作成しています。", "year": "" },
+  "mixi8204067.png": { "title": "", "desc": "mixiで当時描いたもの。マウスで作成しています。", "year": "" },
+  "mixi8281112.png": { "title": "", "desc": "mixiで当時描いたもの。マウスで作成しています。", "year": "" },
+  "mixi8335173.png": { "title": "", "desc": "mixiで当時描いたもの。マウスで作成しています。", "year": "" },
 };
 
 // ── イントロアニメーション ──
@@ -860,7 +878,6 @@ const ALL_INTRO_IMAGES = [
   'works/mindmap/YOSHIKI.jpg',
   'works/mindmap/zibun4koma.jpg',
   // キャラクター（GIF除く）
-  'works/chara/20140504babyincar.jpg',
   'works/chara/2014nenga.jpg',
   'works/chara/2015nenga.jpg',
   'works/chara/2016nenga.jpg',
@@ -888,10 +905,8 @@ const ALL_INTRO_IMAGES = [
   'works/rakugaki/messhi.jpg',
   'works/rakugaki/mixi8201330.png',
   'works/rakugaki/mixi8204067.png',
-  'works/rakugaki/mixi8279537.png',
   'works/rakugaki/mixi8281112.png',
   'works/rakugaki/mixi8335173.png',
-  'works/rakugaki/mixi8851838.png',
   'works/rakugaki/nagatomo.jpg',
   'works/rakugaki/nakamurashinsuke.jpg',
   'works/rakugaki/nakanishimanabu.jpg',
