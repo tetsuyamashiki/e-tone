@@ -289,6 +289,110 @@ nav {
 }
 .contact-form button:hover { opacity: 0.75; }
 
+/* ── チブルーワーカーズ ── */
+.cbw-header { margin-bottom: 1.5rem; }
+.cbw-header-img {
+  width: 100%; max-width: 460px;
+  display: block; margin: 0 auto;
+  height: auto;
+}
+.cbw-grid { grid-template-columns: 1fr; gap: 64px; }
+
+.chapter-card { cursor: pointer; max-width: 400px; margin: 0 auto; }
+.chapter-label-top {
+  display: flex; align-items: baseline; gap: 0.9em; flex-wrap: wrap;
+  margin-bottom: 0.7rem;
+}
+.chapter-num {
+  font-size: 11px; color: var(--text2); letter-spacing: 0.14em; flex-shrink: 0;
+}
+.chapter-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(19px, 3.4vw, 24px); font-weight: 500; letter-spacing: 0.08em;
+  color: var(--text);
+}
+.chapter-thumb {
+  position: relative;
+  aspect-ratio: 852 / 620;
+  overflow: hidden;
+  background: var(--white);
+  border: 3px solid var(--text);
+}
+.chapter-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.chapter-card:hover .chapter-thumb img { transform: scale(1.03); }
+.chapter-range {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 10px; color: var(--text2); letter-spacing: 0.05em;
+}
+
+/* リーダー本体（縦スクロール） */
+#cbw-reader {
+  display: none;
+  position: fixed; inset: 0; z-index: 1500;
+  background: var(--bg);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#cbw-reader.open { display: block; }
+.cbw-reader-topbar {
+  position: sticky; top: 0; z-index: 2;
+  background: var(--bg);
+  border-bottom: 0.5px solid var(--line);
+  padding: 1rem 1.2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem;
+}
+.cbw-reader-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 13px; letter-spacing: 0.06em; color: var(--text);
+}
+.cbw-reader-close {
+  background: none; border: none; color: var(--text2);
+  font-size: 13px; cursor: pointer; letter-spacing: 0.1em;
+  font-family: inherit; font-weight: 300; flex-shrink: 0;
+}
+.cbw-reader-close:hover { color: var(--text); }
+.cbw-reader-body {
+  max-width: 680px; margin: 0 auto;
+  padding: 1.5rem 1rem 2.5rem;
+  display: flex; flex-direction: column; align-items: center;
+}
+.cbw-page { width: 92%; margin: 0 auto 3.2rem; }
+.cbw-page-tag {
+  display: block; font-size: 10px; color: var(--text2);
+  letter-spacing: 0.12em; margin-bottom: 0.5rem;
+}
+.cbw-page img {
+  width: 100%; height: auto; display: block;
+  border: 3px solid var(--text);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.cbw-reader-footer {
+  position: sticky; bottom: 0;
+  background: var(--bg);
+  border-top: 0.5px solid var(--line);
+  padding: 1rem 1.2rem;
+  display: flex; align-items: center; justify-content: center; gap: 1.2rem;
+  flex-wrap: wrap;
+}
+.cbw-nav-btn {
+  background: none; border: 0.5px solid var(--text); color: var(--text);
+  font-family: inherit; font-size: 11px; font-weight: 300;
+  letter-spacing: 0.1em; padding: 8px 18px; cursor: pointer;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+  white-space: nowrap;
+}
+.cbw-nav-btn:hover { background: var(--text); color: var(--bg); }
+.cbw-nav-btn:disabled {
+  opacity: 0.3; cursor: default; pointer-events: none;
+}
+
 /* ── ライトボックス ── */
 #lb {
   display: none; position: fixed; inset: 0; z-index: 999;
@@ -531,7 +635,8 @@ footer {
   </a>
   <!-- PC用タブバー -->
   <div class="tab-bar">
-    <button class="tab-btn active" data-tab="mindmap">似顔絵マインドマップ</button>
+    <button class="tab-btn active" data-tab="cbw">チブルーワーカーズ</button>
+    <button class="tab-btn" data-tab="mindmap">似顔絵マインドマップ</button>
     <button class="tab-btn" data-tab="manga">4コマ漫画</button>
     <button class="tab-btn" data-tab="chara">キャラクター</button>
     <button class="tab-btn" data-tab="rakugaki">落書き</button>
@@ -556,7 +661,9 @@ footer {
     <img src="logo.png" alt="E-Tone" class="overlay-logo-img">
     <span class="overlay-logo-text">E-Tone</span>
   </div>
-  <button class="overlay-btn active" data-tab="mindmap">似顔絵マインドマップ</button>
+  <button class="overlay-btn active" data-tab="cbw">チブルーワーカーズ</button>
+  <div class="overlay-divider"></div>
+  <button class="overlay-btn" data-tab="mindmap">似顔絵マインドマップ</button>
   <div class="overlay-divider"></div>
   <button class="overlay-btn" data-tab="manga">4コマ漫画</button>
   <div class="overlay-divider"></div>
@@ -570,7 +677,7 @@ footer {
 </div>
 
 <!-- 似顔絵マインドマップ -->
-<div class="tab-panel active" id="panel-mindmap">
+<div class="tab-panel" id="panel-mindmap">
   <div class="gallery-panel">
     <div class="panel-header">
       <h2 class="panel-title">似顔絵マインドマップ</h2>
@@ -595,6 +702,23 @@ noteで週３回くらいの頻度で描いています。
 <a class="note-link" href="https://note.com/tetsuyama4ki" target="_blank" rel="noopener">→ note.com/tetsuyama4ki</a></p>
     <div class="grid" id="grid-manga"></div>
     <div class="more-wrap" id="more-manga"></div>
+  </div>
+</div>
+
+<!-- チブルーワーカーズ -->
+<div class="tab-panel active" id="panel-cbw">
+  <div class="gallery-panel">
+    <div class="cbw-header">
+      <img src="works/cbw/header.png" alt="チブルーワーカーズ　〜無駄な仕事は、ない！〜" class="cbw-header-img">
+    </div>
+    <div class="panel-header">
+      <h2 class="panel-title">チブルーワーカーズ</h2>
+      <span class="panel-count" id="cbw-count"></span>
+    </div>
+    <p class="panel-desc">土木の現場を舞台にした4コマ漫画です。noteで毎日1本ずつ更新していて、1週間分（7本）を「話」としてまとめています。
+話をひらくと、下にスクロールしながらまとめて立ち読みできます。
+<a class="note-link" href="https://note.com/tetsuyama4ki" target="_blank" rel="noopener">→ note.com/tetsuyama4ki</a></p>
+    <div class="grid cbw-grid" id="grid-cbw"></div>
   </div>
 </div>
 
@@ -672,6 +796,20 @@ noteで週３回くらいの頻度で描いています。
   <span>&copy; E-Tone / 眞志喜 徹也</span>
   <span>Okinawa, Japan</span>
 </footer>
+
+<!-- チブルーワーカーズ 縦スクロールリーダー -->
+<div id="cbw-reader">
+  <div class="cbw-reader-topbar">
+    <span class="cbw-reader-title" id="cbw-reader-title"></span>
+    <button class="cbw-reader-close" id="cbw-reader-close">close</button>
+  </div>
+  <div class="cbw-reader-body" id="cbw-reader-body"></div>
+  <div class="cbw-reader-footer">
+    <button class="cbw-nav-btn" id="cbw-prev-chapter">&#x2190; 前の話</button>
+    <button class="cbw-nav-btn" id="cbw-back-to-list">一覧へ戻る</button>
+    <button class="cbw-nav-btn" id="cbw-next-chapter">次の話 &#x2192;</button>
+  </div>
+</div>
 
 <div id="lb">
   <button id="lb-close">close</button>
@@ -799,6 +937,25 @@ const DATA = {
   ],
 };
 
+// チブルーワーカーズ：話数を追加したら CBW_TOTAL を増やすだけでOK（画像は works/cbw/001.jpg... の連番）
+const CBW_TOTAL = 42;
+const CBW_IMAGES = Array.from({ length: CBW_TOTAL }, (_, i) => 'works/cbw/' + String(i + 1).padStart(3, '0') + '.jpg');
+function chunkCbw(arr, size) {
+  const out = [];
+  for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+  return out;
+}
+const CBW_CHAPTERS = chunkCbw(CBW_IMAGES, 7);
+// 話タイトル。新しい週が増えたら配列に追記(未設定の話は番号のみ表示)
+const CBW_CHAPTER_TITLES = [
+  'チブルーワーカーズ登場',
+  '施工体制',
+  '安全第一',
+  '発注者',
+  'フシンの技術',
+  '台風当たり年',
+];
+
 const META = {
   "sawabeyu.jpg": { "title": "「弁当事情」\n（澤部佑）", "desc": "コロナと長女の誕生が同年で、さまざまなパラダイムシフトが起きました。\n私が、家事をし始めた頃です。愛妻家で知られるハライチの澤部さんを描きました。", "year": "2020" },
   "abesinzo.jpg": { "title": "「難解用語」\n（安倍晋三）", "desc": "コロナが始まった頃、「パンデミック」や「フェーズ」といった今まで聞いたことのない用語が飛び交いました。それと超絶ダサいアベノマスクをメインに描いたと思われます。", "year": "2020" },
@@ -877,6 +1034,10 @@ const ALL_INTRO_IMAGES = [
   'works/mindmap/yanagisawaatsushi.jpg',
   'works/mindmap/YOSHIKI.jpg',
   'works/mindmap/zibun4koma.jpg',
+  // チブルーワーカーズ（一部）
+  'works/cbw/001.jpg',
+  'works/cbw/015.jpg',
+  'works/cbw/036.jpg',
   // キャラクター（GIF除く）
   'works/chara/2014nenga.jpg',
   'works/chara/2015nenga.jpg',
@@ -1041,6 +1202,7 @@ function switchTab(key) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   // グリッド描画
   if (['mindmap','manga','chara','rakugaki'].includes(key)) buildGrid(key);
+  if (key === 'cbw') buildCbwGrid();
 }
 
 document.querySelectorAll('.overlay-btn').forEach(btn => {
@@ -1088,6 +1250,94 @@ function buildGrid(key) {
   attachThumbClicks(grid);
 }
 
+// ── チブルーワーカーズ：話グリッド ──
+function buildCbwGrid() {
+  const grid = document.getElementById('grid-cbw');
+  if (!grid || grid.children.length > 0) return;
+  document.getElementById('cbw-count').textContent = CBW_CHAPTERS.length + '話 / 全' + CBW_TOTAL + 'P';
+
+  CBW_CHAPTERS.forEach((chapter, idx) => {
+    const first = idx * 7 + 1;
+    const last = idx * 7 + chapter.length;
+    const title = CBW_CHAPTER_TITLES[idx] || '';
+    const coverSrc = `works/cbw/cover${idx + 1}.jpg`;
+    const div = document.createElement('div');
+    div.className = 'chapter-card';
+    div.innerHTML = `
+      <div class="chapter-label-top">
+        <span class="chapter-num">第${idx + 1}話</span>
+        ${title ? `<span class="chapter-title">${title}</span>` : ''}
+      </div>
+      <div class="chapter-thumb">
+        <img src="${coverSrc}" alt="第${idx + 1}話 ${title}" loading="lazy">
+      </div>
+      <span class="chapter-range">掘削深さ${String(first).padStart(3, '0')}〜${String(last).padStart(3, '0')}cm</span>`;
+    div.addEventListener('click', () => openCbwReader(idx));
+    grid.appendChild(div);
+  });
+}
+
+// ── チブルーワーカーズ：縦スクロールリーダー ──
+let cbwChapterIndex = 0;
+
+function openCbwReader(idx) {
+  cbwChapterIndex = idx;
+  renderCbwReader();
+  const reader = document.getElementById('cbw-reader');
+  reader.classList.add('open');
+  reader.scrollTo({ top: 0 });
+  document.body.style.overflow = 'hidden';
+}
+
+function renderCbwReader() {
+  const chapter = CBW_CHAPTERS[cbwChapterIndex];
+  const first = cbwChapterIndex * 7 + 1;
+  const last = cbwChapterIndex * 7 + chapter.length;
+
+  const title = CBW_CHAPTER_TITLES[cbwChapterIndex] || '';
+  document.getElementById('cbw-reader-title').textContent =
+    `第${cbwChapterIndex + 1}話${title ? '「' + title + '」' : ''}（掘削深さ${String(first).padStart(3, '0')}〜${String(last).padStart(3, '0')}cm）`;
+
+  const body = document.getElementById('cbw-reader-body');
+  body.innerHTML = '';
+  chapter.forEach((src, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'cbw-page';
+    wrap.innerHTML = `<span class="cbw-page-tag">掘削深さ${String(first + i).padStart(3, '0')}cm</span><img src="${src}" alt="" loading="lazy">`;
+    body.appendChild(wrap);
+  });
+
+  document.getElementById('cbw-prev-chapter').disabled = cbwChapterIndex === 0;
+  document.getElementById('cbw-next-chapter').disabled = cbwChapterIndex === CBW_CHAPTERS.length - 1;
+}
+
+function closeCbwReader() {
+  document.getElementById('cbw-reader').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('cbw-reader-close').addEventListener('click', closeCbwReader);
+document.getElementById('cbw-back-to-list').addEventListener('click', closeCbwReader);
+document.getElementById('cbw-prev-chapter').addEventListener('click', () => {
+  if (cbwChapterIndex > 0) {
+    cbwChapterIndex--;
+    renderCbwReader();
+    document.getElementById('cbw-reader').scrollTo({ top: 0 });
+  }
+});
+document.getElementById('cbw-next-chapter').addEventListener('click', () => {
+  if (cbwChapterIndex < CBW_CHAPTERS.length - 1) {
+    cbwChapterIndex++;
+    renderCbwReader();
+    document.getElementById('cbw-reader').scrollTo({ top: 0 });
+  }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('cbw-reader').classList.contains('open')) {
+    closeCbwReader();
+  }
+});
+
 function attachThumbClicks(grid) {
   grid.querySelectorAll('.thumb:not(.collapsed)').forEach(thumb => {
     thumb.onclick = () => {
@@ -1111,7 +1361,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 });
 
 // 初期表示
-buildGrid('mindmap');
+buildCbwGrid();
 document.querySelectorAll('.overlay-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const key = btn.dataset.tab;
