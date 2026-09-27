@@ -953,7 +953,7 @@ const DATA = {
 };
 
 // チブルーワーカーズ：話数を追加したら CBW_TOTAL を増やすだけでOK（画像は works/cbw/001.jpg... の連番）
-const CBW_TOTAL = 42;
+const CBW_TOTAL = 49;
 const CBW_IMAGES = Array.from({ length: CBW_TOTAL }, (_, i) => 'works/cbw/' + String(i + 1).padStart(3, '0') + '.jpg');
 function chunkCbw(arr, size) {
   const out = [];
@@ -969,6 +969,7 @@ const CBW_CHAPTER_TITLES = [
   '発注者',
   'フシンの技術',
   '台風当たり年',
+  '出来形管理',
 ];
 
 const META = {
